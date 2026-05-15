@@ -24,7 +24,7 @@ export interface ChatBoxProps {
 const CHAT_HISTORY_STORAGE_KEY = 'roger-ai-chat-history';
 const CONVERSATION_ID_STORAGE_KEY = 'roger-ai-conversation-id';
 
-export function useChatStorage() {
+export function useChatStorage(pausePersistence = false) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -44,14 +44,17 @@ export function useChatStorage() {
   }, []);
 
   useEffect(() => {
-    if (isLoaded && typeof window !== 'undefined') {
+    if (isLoaded && !pausePersistence && typeof window !== 'undefined') {
       localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(messages));
     }
-  }, [messages, isLoaded]);
+  }, [messages, isLoaded, pausePersistence]);
 
   const addMessage = (role: 'user' | 'assistant', content: string) => {
     const newMessage: Message = {
-      id: Date.now().toString(),
+      id:
+        typeof crypto !== 'undefined' && crypto.randomUUID
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random()}`,
       role,
       content,
       timestamp: Date.now(),
@@ -60,11 +63,19 @@ export function useChatStorage() {
     return newMessage;
   };
 
+  const updateMessage = (id: string, content: string) => {
+    setMessages((prev) =>
+      prev.map((message) =>
+        message.id === id ? { ...message, content } : message,
+      ),
+    );
+  };
+
   const clearMessages = () => {
     setMessages([]);
   };
 
-  return { messages, addMessage, clearMessages, isLoaded };
+  return { messages, addMessage, updateMessage, clearMessages, isLoaded };
 }
 
 export default function ChatBox({
@@ -72,9 +83,12 @@ export default function ChatBox({
   onClose,
   embedded = false,
 }: ChatBoxProps) {
-  const { messages, addMessage, clearMessages, isLoaded } = useChatStorage();
+  const [pauseChatPersistence, setPauseChatPersistence] = useState(false);
+  const { messages, addMessage, updateMessage, clearMessages, isLoaded } =
+    useChatStorage(pauseChatPersistence);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAwaitingResponse, setIsAwaitingResponse] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -115,11 +129,14 @@ export default function ChatBox({
 
     const userMessage = inputValue.trim();
     setInputValue('');
+    setPauseChatPersistence(true);
     addMessage('user', userMessage);
+    const assistantMessage = addMessage('assistant', '');
     setIsLoading(true);
+    setIsAwaitingResponse(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/api/chat/stream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -137,19 +154,90 @@ export default function ChatBox({
         throw new Error('Failed to get response');
       }
 
-      const data = await response.json();
-      if (data.conversationId && typeof window !== 'undefined') {
-        localStorage.setItem(CONVERSATION_ID_STORAGE_KEY, data.conversationId);
+      if (!response.body) {
+        throw new Error('Streaming response is not available');
       }
-      addMessage('assistant', data.answer);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+      let streamedAnswer = '';
+
+      const handleStreamEvent = (rawEvent: string) => {
+        const lines = rawEvent.split(/\r?\n/);
+        let eventType = 'message';
+        const dataLines: string[] = [];
+
+        for (const line of lines) {
+          if (line.startsWith('event:')) {
+            eventType = line.slice('event:'.length).trim();
+          } else if (line.startsWith('data:')) {
+            dataLines.push(line.slice('data:'.length).trimStart());
+          }
+        }
+
+        if (dataLines.length === 0) return;
+
+        const data = JSON.parse(dataLines.join('\n'));
+
+        if (
+          data.conversation_id &&
+          typeof window !== 'undefined' &&
+          (eventType === 'metadata' || eventType === 'done')
+        ) {
+          localStorage.setItem(
+            CONVERSATION_ID_STORAGE_KEY,
+            data.conversation_id,
+          );
+        }
+
+        if (eventType === 'token' && typeof data.content === 'string') {
+          streamedAnswer += data.content;
+          setIsAwaitingResponse(false);
+          updateMessage(assistantMessage.id, streamedAnswer);
+        }
+
+        if (eventType === 'done') {
+          const finalAnswer =
+            typeof data.answer === 'string' ? data.answer : streamedAnswer;
+          if (finalAnswer) {
+            streamedAnswer = finalAnswer;
+            updateMessage(assistantMessage.id, finalAnswer);
+          }
+        }
+      };
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const events = buffer.split(/\r?\n\r?\n/);
+        buffer = events.pop() ?? '';
+        events.forEach(handleStreamEvent);
+      }
+
+      buffer += decoder.decode();
+      if (buffer.trim()) {
+        handleStreamEvent(buffer);
+      }
+
+      if (!streamedAnswer) {
+        updateMessage(
+          assistantMessage.id,
+          'Sorry, I could not find any relevant information.',
+        );
+      }
     } catch (error) {
       console.error('Chat API error:', error);
-      addMessage(
-        'assistant',
+      updateMessage(
+        assistantMessage.id,
         'Sorry, I encountered an error. Please try again later.',
       );
     } finally {
       setIsLoading(false);
+      setIsAwaitingResponse(false);
+      setPauseChatPersistence(false);
     }
   };
 
@@ -285,7 +373,7 @@ export default function ChatBox({
             </div>
           ))
         )}
-        {isLoading && (
+        {isAwaitingResponse && (
           <div className="flex justify-start">
             <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
               <div className="flex gap-1">
