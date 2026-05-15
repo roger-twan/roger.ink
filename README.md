@@ -36,6 +36,10 @@ Integrated with GitHub Actions, will automatically run code check whenever there
 
 ## 📝 Change Logs
 
+### 4.6.0 (2026-05-16)
+
+- [Improvement] Persist AI chatbot conversation ID for follow-up questions
+
 ### 4.5.1 (2026-05-15)
 
 - [Improvement] Improve chat message and timestamp alignment
