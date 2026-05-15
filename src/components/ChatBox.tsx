@@ -21,7 +21,8 @@ export interface ChatBoxProps {
   embedded?: boolean;
 }
 
-const STORAGE_KEY = 'roger-ai-chat-history';
+const CHAT_HISTORY_STORAGE_KEY = 'roger-ai-chat-history';
+const CONVERSATION_ID_STORAGE_KEY = 'roger-ai-conversation-id';
 
 export function useChatStorage() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -29,7 +30,7 @@ export function useChatStorage() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(CHAT_HISTORY_STORAGE_KEY);
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
@@ -44,7 +45,7 @@ export function useChatStorage() {
 
   useEffect(() => {
     if (isLoaded && typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(messages));
     }
   }, [messages, isLoaded]);
 
@@ -77,6 +78,13 @@ export default function ChatBox({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const clearChat = () => {
+    clearMessages();
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(CONVERSATION_ID_STORAGE_KEY);
+    }
+  };
 
   const scrollToBottom = () => {
     if (messagesContainerRef.current && messagesEndRef.current) {
@@ -118,7 +126,10 @@ export default function ChatBox({
         },
         body: JSON.stringify({
           message: userMessage,
-          history: messages.map(({ role, content }) => ({ role, content })),
+          conversationId:
+            typeof window !== 'undefined'
+              ? localStorage.getItem(CONVERSATION_ID_STORAGE_KEY)
+              : null,
         }),
       });
 
@@ -127,7 +138,10 @@ export default function ChatBox({
       }
 
       const data = await response.json();
-      addMessage('assistant', data.response);
+      if (data.conversationId && typeof window !== 'undefined') {
+        localStorage.setItem(CONVERSATION_ID_STORAGE_KEY, data.conversationId);
+      }
+      addMessage('assistant', data.answer);
     } catch (error) {
       console.error('Chat API error:', error);
       addMessage(
@@ -181,7 +195,7 @@ export default function ChatBox({
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={clearMessages}
+            onClick={clearChat}
             className="px-3 py-1 text-xs bg-white/20 hover:bg-white/30 rounded transition-colors cursor-pointer"
             title="Clear chat"
           >
