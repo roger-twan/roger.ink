@@ -36,6 +36,10 @@ Integrated with GitHub Actions, will automatically run code check whenever there
 
 ## 📝 Change Logs
 
+### 4.7.1 (2026-05-16)
+
+- [Improvement] Refine streaming chatbot loading and timestamp display
+
 ### 4.7.0 (2026-05-16)
 
 - [Improvement] Add streaming AI chatbot responses with deferred chat history persistence
