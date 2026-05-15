@@ -255,10 +255,14 @@ export default function ChatBox({
                     : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
                 }`}
               >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                <p className="text-sm whitespace-pre-wrap text-left">
+                  {message.content}
+                </p>
                 <span
                   className={`text-xs mt-1 block ${
-                    message.role === 'user' ? 'text-blue-200' : 'text-gray-400'
+                    message.role === 'user'
+                      ? 'text-blue-200 text-right'
+                      : 'text-gray-400 text-left'
                   }`}
                 >
                   {formatTime(message.timestamp)}

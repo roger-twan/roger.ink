@@ -36,6 +36,10 @@ Integrated with GitHub Actions, will automatically run code check whenever there
 
 ## 📝 Change Logs
 
+### 4.5.1 (2026-05-15)
+
+- [Improvement] Improve chat message and timestamp alignment
+
 ### 4.5.0 (2026-04-03)
 
 - [New Feature] AI-powered chatbot integration
