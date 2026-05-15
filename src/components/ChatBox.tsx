@@ -389,7 +389,16 @@ export default function ChatBox({
           })
         )}
         {isAwaitingResponse && (
-          <div className="flex justify-start">
+          <div className="flex gap-2 flex-row">
+            <div className="flex-shrink-0">
+              <Image
+                src={AvatarSmall}
+                alt="AI Assistant"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+            </div>
             <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
               <div className="flex gap-1">
                 <div className="size-2 bg-gray-400 rounded-full animate-bounce"></div>
