@@ -89,6 +89,9 @@ export default function ChatBox({
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isAwaitingResponse, setIsAwaitingResponse] = useState(false);
+  const [streamingMessageId, setStreamingMessageId] = useState<string | null>(
+    null,
+  );
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -132,6 +135,7 @@ export default function ChatBox({
     setPauseChatPersistence(true);
     addMessage('user', userMessage);
     const assistantMessage = addMessage('assistant', '');
+    setStreamingMessageId(assistantMessage.id);
     setIsLoading(true);
     setIsAwaitingResponse(true);
 
@@ -237,6 +241,7 @@ export default function ChatBox({
     } finally {
       setIsLoading(false);
       setIsAwaitingResponse(false);
+      setStreamingMessageId(null);
       setPauseChatPersistence(false);
     }
   };
@@ -330,48 +335,58 @@ export default function ChatBox({
             </p>
           </div>
         ) : (
-          messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex gap-2 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
-            >
-              <div className="flex-shrink-0">
-                {message.role === 'user' ? (
-                  <div className="size-8 rounded-full bg-gray-300 flex items-center justify-center">
-                    <IconUser className="size-5 text-gray-500" />
-                  </div>
-                ) : (
-                  <Image
-                    src={AvatarSmall}
-                    alt="AI Assistant"
-                    width={32}
-                    height={32}
-                    className="rounded-full"
-                  />
-                )}
-              </div>
+          messages.map((message) => {
+            const isStreamingMessage = message.id === streamingMessageId;
+
+            if (isStreamingMessage && !message.content) {
+              return null;
+            }
+
+            return (
               <div
-                className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                  message.role === 'user'
-                    ? 'bg-blue-600 text-white rounded-br-sm'
-                    : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
-                }`}
+                key={message.id}
+                className={`flex gap-2 ${message.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                <p className="text-sm whitespace-pre-wrap text-left">
-                  {message.content}
-                </p>
-                <span
-                  className={`text-xs mt-1 block ${
+                <div className="flex-shrink-0">
+                  {message.role === 'user' ? (
+                    <div className="size-8 rounded-full bg-gray-300 flex items-center justify-center">
+                      <IconUser className="size-5 text-gray-500" />
+                    </div>
+                  ) : (
+                    <Image
+                      src={AvatarSmall}
+                      alt="AI Assistant"
+                      width={32}
+                      height={32}
+                      className="rounded-full"
+                    />
+                  )}
+                </div>
+                <div
+                  className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                     message.role === 'user'
-                      ? 'text-blue-200 text-right'
-                      : 'text-gray-400 text-left'
+                      ? 'bg-blue-600 text-white rounded-br-sm'
+                      : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
                   }`}
                 >
-                  {formatTime(message.timestamp)}
-                </span>
+                  <p className="text-sm whitespace-pre-wrap text-left">
+                    {message.content}
+                  </p>
+                  {!isStreamingMessage && (
+                    <span
+                      className={`text-xs mt-1 block ${
+                        message.role === 'user'
+                          ? 'text-blue-200 text-right'
+                          : 'text-gray-400 text-left'
+                      }`}
+                    >
+                      {formatTime(message.timestamp)}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
         {isAwaitingResponse && (
           <div className="flex justify-start">
