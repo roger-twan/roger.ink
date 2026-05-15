@@ -130,7 +130,6 @@ export default function ChatBox({
             typeof window !== 'undefined'
               ? localStorage.getItem(CONVERSATION_ID_STORAGE_KEY)
               : null,
-          history: messages.map(({ role, content }) => ({ role, content })),
         }),
       });
 
@@ -142,7 +141,7 @@ export default function ChatBox({
       if (data.conversationId && typeof window !== 'undefined') {
         localStorage.setItem(CONVERSATION_ID_STORAGE_KEY, data.conversationId);
       }
-      addMessage('assistant', data.response);
+      addMessage('assistant', data.answer);
     } catch (error) {
       console.error('Chat API error:', error);
       addMessage(
