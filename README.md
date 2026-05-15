@@ -36,6 +36,10 @@ Integrated with GitHub Actions, will automatically run code check whenever there
 
 ## 📝 Change Logs
 
+### 4.7.0 (2026-05-16)
+
+- [Improvement] Add streaming AI chatbot responses with deferred chat history persistence
+
 ### 4.6.0 (2026-05-16)
 
 - [Improvement] Persist AI chatbot conversation ID for follow-up questions
