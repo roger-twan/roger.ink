@@ -2,20 +2,20 @@ import SectionHeader from './section-header';
 
 const focusItems = [
   {
-    title: 'AI-assisted discovery',
-    text: 'Using AI to turn ambiguous ideas, notes, and constraints into clearer product direction.',
+    title: 'Product discovery',
+    text: 'Using AI to turn ambiguous ideas, user needs, notes, and constraints into clearer product direction.',
   },
   {
-    title: 'Prototype acceleration',
-    text: 'Moving from UX options to working flows faster without losing product taste.',
+    title: 'Rapid prototyping',
+    text: 'Moving from concept to working interaction faster with AI-assisted exploration, UI iteration, and implementation.',
   },
   {
-    title: 'Knowledge systems',
-    text: 'Building RAG and context flows that make product and project knowledge usable.',
+    title: 'Engineering workflows',
+    text: 'Leveraging AI to improve efficiency and quality across coding, code review, testing, documentation, automation, and delivery loops.',
   },
   {
-    title: 'Workflow automation',
-    text: 'Connecting tools, data, and AI assistance around real shipping workflows.',
+    title: 'Systems foundations',
+    text: 'Strengthening architecture, databases, cloud, security, distributed systems, and AI fundamentals for reliable delivery.',
   },
 ];
 
@@ -25,8 +25,8 @@ export default function CurrentFocusSection() {
       <div className="container mx-auto px-4">
         <SectionHeader
           eyebrow="Current focus"
-          title="What I am building toward now."
-          description="The throughline is practical: use AI to improve discovery, prototyping, implementation, and delivery while keeping product quality visible."
+          title="What I am sharpening across product and engineering."
+          description="I am focused on building better product instincts, stronger software systems, and practical AI workflows that help ideas become reliable shipped products."
         />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {focusItems.map((item, index) => (
