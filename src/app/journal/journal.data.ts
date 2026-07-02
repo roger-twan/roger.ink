@@ -59,7 +59,7 @@ const _fetchPosts = async () => {
         slug: title,
         thumbnail: thumbnail,
         date: String(metadata.date || ''),
-        tags: metadata.tags.map((tag: string) => tag.split('/')[1]) || [],
+        tags: metadata.tags?.map((tag: string) => tag.split('/')[1]) || [],
         description: content
           .replace(/<[^>]+>/g, '') // remove html
           .replace(/!\[.*\]\((.*)\)/g, '') // remove image

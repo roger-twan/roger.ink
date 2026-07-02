@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { format } from 'date-fns';
 import IconArrowRight from '@public/icons/arrow-right.svg';
 import type { Post } from '../journal/journal.data';
 import SectionHeader from './section-header';
@@ -15,8 +16,8 @@ export default function JournalPreviewSection({
       <div className="container mx-auto px-4">
         <SectionHeader
           eyebrow="Journal"
-          title="Notes on building products with AI."
-          description="A quieter home for AI-assisted workflows, architecture decisions, UX tradeoffs, and reflections from building."
+          title="Read how I think through product and engineering."
+          description="Build notes on AI-assisted workflows, system design, UX decisions, and the tradeoffs behind shipping software products."
           theme="dark"
         />
         <div className="grid gap-4 md:grid-cols-3">
@@ -28,7 +29,21 @@ export default function JournalPreviewSection({
               data-reveal
               className="reveal-on-scroll rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-white/[0.07]"
             >
-              <p className="text-sm text-cyan-200">{post.date}</p>
+              <p className="text-sm text-cyan-200">
+                {format(new Date(post.date), 'LLL dd, yyyy')}
+              </p>
+              {post.tags.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-xs font-medium text-white/60"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
               <h3 className="mt-4 text-lg font-semibold text-white">
                 {post.title}
               </h3>
@@ -43,7 +58,7 @@ export default function JournalPreviewSection({
             href="/journal"
             className="inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
           >
-            Read Journal
+            Read the journal
             <IconArrowRight className="ml-2 size-4" />
           </Link>
         </div>

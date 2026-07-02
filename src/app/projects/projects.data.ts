@@ -44,10 +44,12 @@ export interface Project {
   featured: boolean;
 }
 
+let _data: Project[] = [];
+
 const isFeaturedProject = (value: unknown) =>
   value === true || String(value).toLowerCase() === 'true';
 
-const getProjects = async () => {
+const _fetchProjects = async () => {
   const result: Project[] = [];
 
   const folderData = await fetchNotesRepo('/contents/{path}', {
@@ -115,9 +117,17 @@ const getProjects = async () => {
     }
   }
 
-  return result.sort((a: Project, b: Project) =>
+  _data = result.sort((a: Project, b: Project) =>
     compareAsc(new Date(b.date), new Date(a.date)),
   );
+};
+
+const getProjects = async () => {
+  if (!_data.length) {
+    await _fetchProjects();
+  }
+
+  return _data;
 };
 
 export default getProjects;
