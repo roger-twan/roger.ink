@@ -43,7 +43,7 @@ interface Tags {
 export const metadata: Metadata = {
   title: 'Journal | Roger Twan',
   description:
-    'Notes and reflections on AI product engineering, full-stack systems, design, and experiments.',
+    'Notes and reflections on AI-assisted product building, full-stack systems, design, and experiments.',
 };
 
 const getTags = (posts: Post[]) => {
@@ -123,7 +123,7 @@ export default async function JournalList({ searchParams }: JournalListProps) {
               Journal
             </h1>
             <p className="text-lg mb-8 text-center max-w-2xl animate__animated animate__flipInX">
-              Notes and reflections on AI product engineering, full-stack
+              Notes and reflections on AI-assisted product building, full-stack
               systems, design decisions, and experiments.
             </p>
           </div>

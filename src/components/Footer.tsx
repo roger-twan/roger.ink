@@ -44,8 +44,8 @@ export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
               </span>
             </Link>
             <p className="leading-6 text-white/80">
-              AI Product Engineer building AI-native applications, agent
-              workflows, RAG systems, and polished full-stack products.
+              Full-stack Product Engineer leveraging AI across the product
+              lifecycle—from research and design to development and shipping.
             </p>
           </section>
 

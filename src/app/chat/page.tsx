@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import ChatBox from '@/components/ChatBox';
 
 export const metadata: Metadata = {
-  title: 'Chat | Roger Twan',
-  description: "Chat with Roger's AI Assistant.",
+  title: 'Chat with my AI assistant | Roger Twan',
+  description:
+    "Ask Roger's RAG-powered AI assistant about his work, projects, notes, and product-building approach.",
 };
 
 export default function ChatPage() {
@@ -14,10 +15,11 @@ export default function ChatPage() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center animate__animated animate__fadeInDown">
-              Chat with My AI Assistant
+              Chat with my AI assistant
             </h1>
             <p className="text-lg mb-8 text-center max-w-2xl animate__animated animate__flipInX">
-              Have a conversation with my AI assistant. Ask anything about me.
+              Ask about my projects, notes, and how I use AI to support product
+              work from idea to delivery.
             </p>
           </div>
         </div>

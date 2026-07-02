@@ -7,7 +7,7 @@ import ProjectsList from './list';
 export const metadata: Metadata = {
   title: 'Projects | Roger Twan',
   description:
-    'Selected AI products, full-stack applications, workflow tools, and product experiments by Roger Twan.',
+    'Selected products, AI-assisted workflows, full-stack applications, and product experiments by Roger Twan.',
 };
 
 export default async function Projects() {
@@ -23,9 +23,9 @@ export default async function Projects() {
               Projects
             </h1>
             <p className="text-lg mb-8 text-center max-w-2xl animate__animated animate__flipInX">
-              Selected AI products, full-stack applications, workflow tools, and
-              product experiments with an emphasis on polished interfaces and
-              practical systems.
+              Selected products, AI-assisted workflows, full-stack applications,
+              and product experiments with an emphasis on polished interfaces
+              and practical systems.
             </p>
           </div>
         </div>

@@ -2,20 +2,20 @@
 
 ## Positioning
 
-Roger Twan's website should move from a general full-stack developer portfolio toward an AI-native product engineer presence.
+Roger Twan's website should move from a general full-stack developer portfolio toward a product engineer presence shaped by AI-assisted building.
 
 Primary message:
 
-> AI Product Engineer building AI-native applications, agent workflows, and modern full-stack products.
+> Full-stack product engineer using AI-assisted workflows to move ideas into polished products.
 
-The site should make visitors feel that Roger is actively building polished AI products, not only writing code or publishing a personal blog.
+The site should make visitors feel that Roger knows how to integrate AI into the product-building workflow: discovery, prototyping, implementation, knowledge systems, automation, and delivery. It should also make clear that Roger can build AI products when intelligence is part of the product itself.
 
 ## Visual Direction
 
-- Product-first, AI-native, startup-ready.
+- Product-first, AI-assisted, startup-ready.
 - Clean neutral base: white, graphite, black, restrained cyan, lime, and amber accents.
-- Large product screenshots and AI workspace surfaces should carry the first impression.
-- Use dashboard, agent workflow, RAG, architecture, and build-log visuals as proof.
+- Large product screenshots and workflow surfaces should carry the first impression.
+- Use product workflow, RAG, architecture, automation, and shipping visuals as proof.
 - Avoid generic blue-purple gradients, cartoon robots, neon brains, badge walls, stock-photo AI imagery, and blog-first layouts.
 
 Generated visual references:
@@ -32,10 +32,10 @@ Roger Twan Website
 ├── Journal
 ├── About
 ├── Contact
-└── AI Assistant Chat
+└── Chat with my AI assistant
 ```
 
-AI Assistant Chat should be a first-level navigation item because it connects to Roger's RAG system and acts as the strongest interactive AI-native proof on the site.
+Chat with my AI assistant should appear as a primary CTA rather than a normal nav link. It connects to Roger's RAG system and acts as a strong interactive proof point, but it should support the broader message: Roger uses AI to improve product building from idea to delivery.
 
 ## Global Layout
 
@@ -60,7 +60,7 @@ Global Layout
 │
 └── Footer
     ├── Short positioning line
-    │   └── AI Product Engineer building AI-native applications and workflows
+    │   └── Full-stack product engineer using AI-assisted workflows
     ├── Quick Links
     │   ├── Home
     │   ├── Projects
@@ -74,7 +74,7 @@ Global Layout
     └── Copyright / location / availability
 ```
 
-All pages should share the same header and footer. The AI Assistant Chat page may use a more immersive middle layout, but it should still feel connected to the same site system.
+All pages should share the same header and footer. The chat page may use a more immersive middle layout, but it should still feel connected to the same site system.
 
 ## Responsive Rules
 
@@ -122,41 +122,46 @@ Consistency should cover:
 Roger Twan Website
 ├── Home
 │   ├── Hero
-│   │   ├── AI Product Engineer positioning
-│   │   ├── AI workspace / product screenshot
+│   │   ├── AI-assisted product-building positioning
+│   │   ├── Product workflow / product screenshot
 │   │   ├── CTA: View Projects
 │   │   ├── CTA: Chat with AI Assistant
 │   │   └── CTA: GitHub
+│   ├── AI Assistant
+│   │   ├── RAG-powered assistant connected to site knowledge
+│   │   ├── Example of AI embedded in a product experience
+│   │   ├── Inline chat entry
+│   │   └── Full chat page entry
 │   ├── Featured Project
-│   │   ├── Main AI showcase
+│   │   ├── Main product showcase
 │   │   ├── Screenshots
-│   │   ├── Live entry / Chat entry
+│   │   ├── Live entry
 │   │   ├── Architecture preview
 │   │   └── GitHub / Case Study
 │   ├── Current Focus
-│   │   ├── AI agents
-│   │   ├── RAG systems
-│   │   ├── AI-native UX
+│   │   ├── AI-assisted discovery
+│   │   ├── Prototype acceleration
+│   │   ├── Knowledge systems
 │   │   ├── Workflow automation
-│   │   └── Self-hosted AI infrastructure
-│   ├── Selected AI Work
+│   │   └── Practical shipping systems
+│   ├── Selected Work
 │   │   ├── 3-5 curated projects
 │   │   ├── Product screenshots
-│   │   ├── AI workflow tags
+│   │   ├── Workflow / product tags
 │   │   └── Live / GitHub / Case Study links
 │   ├── Journal Preview
-│   │   ├── Latest AI build notes
-│   │   └── RAG / agents / AI UX topics
+│   │   ├── Latest product-building notes
+│   │   └── AI workflows / RAG / UX / architecture topics
 │   ├── About Preview
-│   │   └── Full-stack + UX + AI product background
+│   │   └── Full-stack + UX + AI-assisted product background
 │   └── Contact CTA
 │       └── Collaboration / hiring prompt
 │
 ├── Projects
 │   ├── Page Hero
-│   │   └── Selected AI products and experiments
+│   │   └── Selected products, AI-assisted workflows, and experiments
 │   ├── Featured Project
-│   │   ├── Killer AI showcase
+│   │   ├── Strong product showcase
 │   │   ├── Screenshots
 │   │   ├── Demo
 │   │   ├── Architecture
@@ -177,7 +182,7 @@ Roger Twan Website
 │       ├── Screenshots
 │       └── Deployment notes
 │
-├── AI Assistant Chat
+├── Chat with my AI assistant
 │   ├── Chat Interface
 │   │   ├── Direct conversation with Roger's AI assistant
 │   │   ├── Connected to Roger's RAG system
@@ -188,7 +193,7 @@ Roger Twan Website
 │   │   ├── Projects
 │   │   ├── Technical notes
 │   │   ├── Journal
-│   │   └── Portfolio context
+│   │   └── Project context
 │   ├── RAG System Explanation
 │   │   ├── Retrieval flow
 │   │   ├── Knowledge base
@@ -223,7 +228,7 @@ Roger Twan Website
 │
 ├── Journal
 │   ├── Page Hero
-│   │   └── Notes from building AI-native products
+│   │   └── Notes on building products with AI
 │   ├── Featured Build Log
 │   │   └── Current major experiment
 │   ├── Topic Filters
@@ -242,7 +247,7 @@ Roger Twan Website
 ├── About
 │   ├── Positioning Summary
 │   │   ├── Full-stack engineer
-│   │   ├── AI product engineer direction
+│   │   ├── AI-assisted product-building direction
 │   │   └── UI/UX background
 │   ├── How I Work
 │   │   ├── Product thinking
@@ -250,7 +255,7 @@ Roger Twan Website
 │   │   ├── UX taste
 │   │   └── Shipping mindset
 │   ├── Skills
-│   │   ├── AI product engineering
+│   │   ├── AI-assisted product engineering
 │   │   ├── Full-stack systems
 │   │   ├── UX/UI
 │   │   └── Infrastructure
@@ -264,7 +269,7 @@ Roger Twan Website
 │
 └── Contact
     ├── Contact Hero
-    │   └── Build AI-native products and workflows
+    │   └── Build products faster and better with AI
     ├── Contact Form
     │   ├── Name
     │   ├── Email
@@ -274,7 +279,7 @@ Roger Twan Website
     │   ├── LinkedIn
     │   └── Email
     └── Collaboration Types
-        ├── AI product engineering
+        ├── AI-assisted product engineering
         ├── RAG / agent workflows
         ├── Prototype to production
         └── Full-stack product builds
@@ -285,7 +290,7 @@ Roger Twan Website
 ```text
 Phase 1
 ├── Home
-├── AI Assistant Chat
+├── Chat with my AI assistant
 └── Projects
 
 Phase 2
@@ -297,4 +302,4 @@ Phase 3
 └── Contact polish
 ```
 
-Phase 1 should change the first impression from general full-stack developer to AI-native product builder as quickly as possible.
+Phase 1 should change the first impression from general full-stack developer to product engineer who uses AI as a practical force multiplier across the build process.

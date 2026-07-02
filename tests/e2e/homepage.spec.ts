@@ -6,7 +6,7 @@ test.describe('Homepage', () => {
   }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle(/Roger Twan | AI Product Engineer/i);
+    await expect(page).toHaveTitle(/Roger Twan | Full-Stack Product Engineer/i);
     await expect(
       page.getByRole('link', { name: /Home/i }).first(),
     ).toBeVisible();
