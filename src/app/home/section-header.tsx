@@ -12,7 +12,10 @@ export default function SectionHeader({
   theme = 'light',
 }: SectionHeaderProps) {
   return (
-    <div className="mx-auto mb-10 max-w-3xl text-center">
+    <div
+      data-reveal
+      className="reveal-on-scroll mx-auto mb-10 max-w-3xl text-center"
+    >
       <p
         className={`mb-3 text-xs font-semibold uppercase tracking-[0.24em] ${
           theme === 'dark' ? 'text-cyan-300' : 'text-cyan-600'

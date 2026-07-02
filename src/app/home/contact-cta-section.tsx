@@ -5,7 +5,10 @@ export default function ContactCtaSection() {
   return (
     <section className="bg-white py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 text-center shadow-sm md:p-12">
+        <div
+          data-reveal
+          className="reveal-on-scroll rounded-[2rem] border border-neutral-200 bg-neutral-50 p-8 text-center shadow-sm md:p-12"
+        >
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600">
             Work together
           </p>

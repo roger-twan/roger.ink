@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="absolute inset-x-0 bottom-0 -z-10 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
 
       <div className="container mx-auto grid min-h-[720px] items-center gap-12 px-4 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:pb-20">
-        <div className="max-w-3xl">
+        <div className="animate-workflow-rise max-w-3xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm font-medium text-neutral-700 shadow-sm">
             <span className="size-2 rounded-full bg-lime-400" />
             Building products with AI as a force multiplier
@@ -35,7 +35,7 @@ export default function HeroSection() {
             </Link>
             <Link
               href="/chat"
-              className="inline-flex items-center justify-center rounded-xl border border-neutral-200 bg-white px-5 py-3 text-sm font-semibold text-neutral-950 shadow-sm transition hover:-translate-y-0.5 hover:border-cyan-300 hover:text-cyan-700"
+              className="inline-flex items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-50 px-5 py-3 text-sm font-semibold text-cyan-950 shadow-sm shadow-cyan-900/5 transition hover:-translate-y-0.5 hover:border-cyan-400 hover:bg-cyan-100"
             >
               <IconChatbot className="mr-2 size-5" />
               Chat with my AI assistant

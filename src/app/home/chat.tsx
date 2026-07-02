@@ -1,11 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import IconChatbot from '@public/icons/chatbot.svg';
 import ChatBox from '@/components/ChatBox';
 
 export default function ChatWidget() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isChatOpen) {
@@ -23,28 +29,32 @@ export default function ChatWidget() {
       <button
         onClick={() => setIsChatOpen(true)}
         data-gtm-action="click_ai_chat_btn"
-        className="relative inline-flex items-center justify-center px-6 py-3 overflow-hidden font-medium text-white bg-gradient-to-r from-blue-600 via-purple-700 to-blue-600 transition duration-300 ease-out border-1 border-white rounded-lg group cursor-pointer z-10 animate-gradient"
+        className="group relative z-10 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border border-cyan-300/30 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 shadow-sm shadow-cyan-950/20 transition hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-cyan-300/15"
       >
-        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease">
-          <IconChatbot className="size-8 text-blue-700" />
-        </span>
-        <span className="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease gap-2">
-          <IconChatbot className="size-5 text-white" />
-          Chat with My AI Assistant
-        </span>
-        <span className="relative invisible flex items-center gap-2">
-          <IconChatbot className="size-5 text-white" />
+        <span className="pointer-events-none absolute inset-y-0 left-0 w-1/2 -translate-x-full bg-gradient-to-r from-transparent via-cyan-200/20 to-transparent transition duration-700 group-hover:translate-x-[220%]" />
+        <span className="relative flex items-center gap-2">
+          <span className="flex size-7 items-center justify-center rounded-lg bg-cyan-300/15 text-cyan-100 transition group-hover:bg-cyan-300/25">
+            <IconChatbot className="size-4" />
+          </span>
           Chat with My AI Assistant
         </span>
       </button>
 
-      {isChatOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="w-full max-w-2xl h-[80vh] sm:h-[70vh] md:h-[600px] rounded-2xl shadow-2xl overflow-hidden bg-white">
-            <ChatBox isOpen={true} onClose={() => setIsChatOpen(false)} />
-          </div>
-        </div>
-      )}
+      {isMounted &&
+        isChatOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[9999] flex min-h-dvh items-center justify-center bg-slate-950/55 p-4 backdrop-blur-lg">
+            <div className="relative h-[80dvh] w-full max-w-2xl overflow-hidden rounded-[2rem] bg-neutral-950 p-px shadow-[0_24px_90px_rgba(8,47,73,0.55),0_0_0_1px_rgba(255,255,255,0.08)] sm:h-[70dvh] md:h-[600px]">
+              <span className="animate-workflow-border pointer-events-none absolute left-1/2 top-1/2 h-[160%] w-[160%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_45deg,rgba(34,211,238,0.75)_75deg,rgba(190,242,100,0.65)_105deg,transparent_140deg,transparent_360deg)] opacity-70" />
+              <div className="relative m-[3px] h-[calc(100%-6px)] overflow-hidden rounded-[1.8rem] bg-neutral-950 p-2">
+                <div className="h-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-neutral-900">
+                  <ChatBox isOpen={true} onClose={() => setIsChatOpen(false)} />
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

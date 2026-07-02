@@ -6,6 +6,7 @@ import CurrentFocusSection from './current-focus-section';
 import FeaturedProjectSection from './featured-project-section';
 import HeroSection from './hero-section';
 import JournalPreviewSection from './journal-preview-section';
+import RevealOnScroll from './reveal-on-scroll';
 import SelectedWorkSection from './selected-work-section';
 
 export default async function Home() {
@@ -15,6 +16,7 @@ export default async function Home() {
 
   return (
     <div className="w-full overflow-hidden bg-white">
+      <RevealOnScroll />
       <HeroSection />
       <AssistantSection />
       <FeaturedProjectSection project={selectedProjects[0]} />

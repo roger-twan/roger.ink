@@ -29,15 +29,25 @@ export default function FeaturedProjectSection({
           description="The homepage should lead with a showcase that feels inspectable: screenshots, workflow, architecture, and a clear reason the product exists."
         />
 
-        <div className="grid overflow-hidden rounded-[2rem] border border-neutral-200 bg-neutral-50 shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="min-h-[320px] bg-neutral-950 p-3">
+        <div
+          data-reveal
+          className="reveal-on-scroll grid overflow-hidden rounded-[2rem] border border-neutral-200 bg-neutral-50 shadow-sm lg:grid-cols-[1.05fr_0.95fr]"
+        >
+          <div
+            data-reveal
+            className="reveal-on-scroll min-h-[320px] bg-neutral-950 p-3"
+          >
             <ClientImage
               src={project.image}
               alt={project.title}
               className="h-full min-h-[320px] rounded-[1.5rem] bg-neutral-900"
             />
           </div>
-          <div className="p-6 sm:p-8 lg:p-10">
+          <div
+            data-reveal
+            className="reveal-on-scroll p-6 sm:p-8 lg:p-10"
+            style={{ animationDelay: '120ms' }}
+          >
             <div className="mb-5 flex flex-wrap gap-2">
               {project.technologies.slice(0, 5).map((tech) => (
                 <span
@@ -58,7 +68,7 @@ export default function FeaturedProjectSection({
               {projectProof.map((item) => (
                 <div
                   key={item}
-                  className="rounded-2xl border border-neutral-200 bg-white p-4"
+                  className="rounded-2xl border border-neutral-200 bg-white p-4 transition hover:-translate-y-0.5 hover:border-cyan-200"
                 >
                   <p className="text-sm font-semibold text-neutral-950">
                     {item}

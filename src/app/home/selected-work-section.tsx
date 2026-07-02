@@ -20,10 +20,12 @@ export default function SelectedWorkSection({
           description="Only the strongest projects should be pulled forward on the homepage, with screenshots, workflow, and proof links doing more work than a badge wall."
         />
         <div className="grid gap-6 md:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article
               key={project.title}
-              className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              style={{ animationDelay: `${index * 100}ms` }}
+              data-reveal
+              className="reveal-on-scroll group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
             >
               <ClientImage
                 src={project.image}

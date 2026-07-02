@@ -20,11 +20,13 @@ export default function JournalPreviewSection({
           theme="dark"
         />
         <div className="grid gap-4 md:grid-cols-3">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <Link
               key={post.slug}
               href={`/journal/${post.slug}`}
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-white/[0.07]"
+              style={{ animationDelay: `${index * 100}ms` }}
+              data-reveal
+              className="reveal-on-scroll rounded-2xl border border-white/10 bg-white/[0.04] p-5 transition hover:-translate-y-1 hover:border-cyan-300/50 hover:bg-white/[0.07]"
             >
               <p className="text-sm text-cyan-200">{post.date}</p>
               <h3 className="mt-4 text-lg font-semibold text-white">

@@ -29,10 +29,12 @@ export default function CurrentFocusSection() {
           description="The throughline is practical: use AI to improve discovery, prototyping, implementation, and delivery while keeping product quality visible."
         />
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {focusItems.map((item) => (
+          {focusItems.map((item, index) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+              style={{ animationDelay: `${index * 90}ms` }}
+              data-reveal
+              className="reveal-on-scroll rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
             >
               <span className="mb-6 block h-1.5 w-12 rounded-full bg-gradient-to-r from-cyan-400 to-lime-300" />
               <h3 className="text-lg font-semibold text-neutral-950">
