@@ -25,7 +25,7 @@ export default function ContactCtaSection() {
               href="/contact"
               className="inline-flex items-center justify-center rounded-xl bg-neutral-950 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-neutral-950/10 transition hover:-translate-y-0.5 hover:bg-neutral-800"
             >
-              Contact Roger
+              Get in touch
               <IconArrowRight className="ml-2 size-4" />
             </Link>
             <Link

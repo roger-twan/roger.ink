@@ -10,7 +10,7 @@ import SelectedWorkSection from './selected-work-section';
 
 export default async function Home() {
   const [projects, posts] = await Promise.all([getProjects(), getPosts()]);
-  const selectedProjects = projects.slice(0, 3);
+  const selectedProjects = projects.filter((project) => project.featured);
   const latestPosts = posts.slice(0, 3);
 
   return (
@@ -19,7 +19,9 @@ export default async function Home() {
       <HeroSection />
       <FeaturedProjectSection />
       <CurrentFocusSection />
-      <SelectedWorkSection projects={selectedProjects} />
+      {selectedProjects.length > 0 && (
+        <SelectedWorkSection projects={selectedProjects} />
+      )}
       <JournalPreviewSection posts={latestPosts} />
       <ContactCtaSection />
     </div>

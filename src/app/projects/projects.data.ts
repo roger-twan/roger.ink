@@ -41,11 +41,13 @@ export interface Project {
   image: string;
   links: Link[];
   date: string;
+  featured: boolean;
 }
 
-let _data: Project[] = [];
+const isFeaturedProject = (value: unknown) =>
+  value === true || String(value).toLowerCase() === 'true';
 
-const _fetchProjects = async () => {
+const getProjects = async () => {
   const result: Project[] = [];
 
   const folderData = await fetchNotesRepo('/contents/{path}', {
@@ -108,21 +110,14 @@ const _fetchProjects = async () => {
         technologies: metadata.technologies || [],
         links: links,
         date: metadata.date || '',
+        featured: isFeaturedProject(metadata.featured),
       });
     }
   }
 
-  _data = result.sort((a: Project, b: Project) =>
+  return result.sort((a: Project, b: Project) =>
     compareAsc(new Date(b.date), new Date(a.date)),
   );
-};
-
-const getProjects = async () => {
-  if (!_data.length) {
-    await _fetchProjects();
-  }
-
-  return _data;
 };
 
 export default getProjects;
