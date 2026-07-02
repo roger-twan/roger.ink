@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Navigation', () => {
   const pages = [
     { path: '/about', name: 'About' },
-    { path: '/portfolio', name: 'Portfolio' },
-    { path: '/blog', name: 'Blog' },
+    { path: '/projects', name: 'Projects' },
+    { path: '/journal', name: 'Journal' },
     { path: '/contact', name: 'Contact' },
   ];
 

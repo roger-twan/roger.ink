@@ -4,37 +4,33 @@ import { useState, useEffect } from 'react';
 import IconLive from '@public/icons/live.svg';
 import IconGithub from '@public/icons/github.svg';
 import IconFigma from '@public/icons/figma.svg';
-import IconBlog from '@public/icons/blog.svg';
+import IconJournal from '@public/icons/journal.svg';
 import ClientImage from '@/components/ClientImage';
-import { Portfolio, Category, CategoryObj } from './portfolio.data';
+import { Project, Category, CategoryObj } from './projects.data';
 
 const svgClasses = 'size-4 mr-1';
 export const LinkTypeIconMap = {
   GitHub: <IconGithub className={svgClasses} />,
-  Blog: <IconBlog className={svgClasses} />,
+  Journal: <IconJournal className={svgClasses} />,
   Figma: <IconFigma className={svgClasses} />,
   Live: <IconLive className={svgClasses} />,
 };
 
-export default function PortfolioList({
-  portfolio,
-}: {
-  portfolio: Portfolio[];
-}) {
+export default function ProjectsList({ projects }: { projects: Project[] }) {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [filteredPortfolio, setFilteredPortfolio] = useState(portfolio);
+  const [filteredProjects, setFilteredProjects] = useState(projects);
 
   useEffect(() => {
     if (selectedCategory === 'All') {
-      setFilteredPortfolio(portfolio);
+      setFilteredProjects(projects);
     } else {
-      setFilteredPortfolio(
-        portfolio.filter((item) =>
+      setFilteredProjects(
+        projects.filter((item) =>
           item.categories.includes(selectedCategory as Category),
         ),
       );
     }
-  }, [selectedCategory, portfolio]);
+  }, [selectedCategory, projects]);
 
   return (
     <>
@@ -61,7 +57,7 @@ export default function PortfolioList({
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {filteredPortfolio.map((item) => (
+        {filteredProjects.map((item) => (
           <div
             key={item.title}
             className="group bg-gray-100 rounded-lg shadow flex flex-col overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all duration-300"

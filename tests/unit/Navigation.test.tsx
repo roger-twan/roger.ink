@@ -8,6 +8,9 @@ jest.mock('@public/icons/menu.svg', () => (props: any) => (
 jest.mock('@public/icons/close.svg', () => (props: any) => (
   <svg {...props} data-testid="close-icon" />
 ));
+jest.mock('@public/icons/chatbot.svg', () => (props: any) => (
+  <svg {...props} data-testid="chatbot-icon" />
+));
 jest.mock('@public/icons/linkedin.svg', () => (props: any) => (
   <svg {...props} data-testid="linkedin-icon" />
 ));
@@ -43,13 +46,18 @@ describe('Navigation', () => {
       screen.getAllByRole('link', { name: /About/i }).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getAllByRole('link', { name: /Portfolio/i }).length,
+      screen.getAllByRole('link', { name: /Projects/i }).length,
     ).toBeGreaterThan(0);
     expect(
-      screen.getAllByRole('link', { name: /Blog/i }).length,
+      screen.getAllByRole('link', { name: /Journal/i }).length,
     ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole('link', { name: /Contact/i }).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole('link', {
+        name: /Chat with my AI assistant/i,
+      }).length,
     ).toBeGreaterThan(0);
   });
 

@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import IconEmail from '@public/icons/email.svg';
 import IconPhone from '@public/icons/phone.svg';
+import IconLogo from '@public/logo.svg';
 
 import { socialLinks } from './SocialMedia';
 
@@ -13,41 +13,45 @@ interface NavItem {
 
 export const navLinks: NavItem[] = [
   { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/journal', label: 'Journal' },
   { href: '/about', label: 'About' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
+
+export const chatCta: NavItem = {
+  href: '/chat',
+  label: 'Chat with my AI assistant',
+};
 
 export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer {...props} className="bg-black text-white py-10 mt-auto">
+    <footer {...props} className="bg-black text-sm text-white py-10 mt-auto">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-          {/* Company/Portfolio Info */}
+          {/* Site Info */}
           <section>
             <Link
               href="/"
               aria-label="Roger Twan, homepage"
               className="flex items-center justify-center mb-3 md:justify-start md:-ml-1.5"
             >
-              <Image src="/logo.svg" alt="Logo" width={40} height={40} />
-              <span className="font-bold text-lg pt-2.5 -ml-1.5">
+              <IconLogo className="text-white" width={40} height={40} />
+              <span className="font-bold text-base pt-2.5 -ml-1.5">
                 oger Twan
               </span>
             </Link>
-            <p className="text-white/80">
-              Professional full stack developer building elegant, performant web
-              and mobile applications through a blend of design thinking and
-              modern technologies.
+            <p className="leading-6 text-white/80">
+              AI Product Engineer building AI-native applications, agent
+              workflows, RAG systems, and polished full-stack products.
             </p>
           </section>
 
           {/* Quick Links */}
           <section>
-            <h2 className="font-bold mb-3 text-base">Quick Links</h2>
+            <h2 className="font-bold mb-3 text-sm">Quick Links</h2>
             <ul className="grid grid-cols-2 gap-2 w-40 m-auto md:m-0 text-center md:text-left">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -64,7 +68,7 @@ export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
 
           {/* Social Media */}
           <section>
-            <h2 className="font-bold mb-3 text-base">Social Media</h2>
+            <h2 className="font-bold mb-3 text-sm">Social Media</h2>
             <div className="inline-block space-y-2">
               {socialLinks.map((link) => (
                 <div
@@ -83,18 +87,18 @@ export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
 
           {/* Contact Info */}
           <section>
-            <h2 className="font-bold mb-3 text-base">Contact Info</h2>
+            <h2 className="font-bold mb-3 text-sm">Contact Info</h2>
             <div className="inline-block space-y-2">
               <div className="flex items-center text-white/80 hover:text-white">
-                <IconEmail className="size-5 mr-2" aria-hidden="true" />
+                <IconEmail className="size-4 mr-2" aria-hidden="true" />
                 <a href="mailto:roger.twan@gmail.com">roger.twan@gmail.com</a>
               </div>
               <div className="flex items-center text-white/80 hover:text-white">
-                <IconPhone className="size-5 mr-2" aria-hidden="true" />
+                <IconPhone className="size-4 mr-2" aria-hidden="true" />
                 <a href="tel:+16138621168">+1 (613) 862-1168</a>
               </div>
               <div className="flex items-center text-white/80 hover:text-white">
-                <IconPhone className="size-5 mr-2" aria-hidden="true" />
+                <IconPhone className="size-4 mr-2" aria-hidden="true" />
                 <a href="tel:+8618788528878">+86 187-8852-8878</a>
               </div>
             </div>
@@ -102,7 +106,7 @@ export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-10 pt-6 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between text-sm text-white/60">
+        <div className="mt-10 pt-6 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between text-xs text-white/60">
           <p className="mb-2 md:mb-0">
             © {currentYear} Roger Twan. All rights reserved.
           </p>

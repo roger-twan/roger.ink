@@ -1,7 +1,7 @@
-import getPosts from '@/app/blog/blog.data';
-import BlogCard from '@/app/blog/blog-card';
+import getPosts from '@/app/journal/journal.data';
+import JournalCard from '@/app/journal/journal-card';
 
-export default async function BlogModule() {
+export default async function JournalModule() {
   const posts = await getPosts();
 
   return (
@@ -12,7 +12,7 @@ export default async function BlogModule() {
       </p>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
         {posts.slice(0, 4).map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <JournalCard key={post.slug} post={post} />
         ))}
       </div>
     </div>

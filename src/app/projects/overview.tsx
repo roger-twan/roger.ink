@@ -1,13 +1,13 @@
-import getPortfolio, { Category, CategoryObj } from './portfolio.data';
+import getProjects, { Category, CategoryObj } from './projects.data';
 
-interface PortfolioOverviewProps {
+interface ProjectsOverviewProps {
   heading?: string;
 }
 
-export default async function PortfolioOverview({
+export default async function ProjectsOverview({
   heading,
-}: PortfolioOverviewProps) {
-  const portfolio = await getPortfolio();
+}: ProjectsOverviewProps) {
+  const projects = await getProjects();
 
   return (
     <>
@@ -22,7 +22,7 @@ export default async function PortfolioOverview({
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="bg-blue-50 rounded-lg shadow p-6 text-center">
           <h3 className="text-blue-600 font-bold text-3xl">
-            {portfolio.length}
+            {projects.length}
           </h3>
           <p className="text-gray-600">Projects Completed</p>
         </div>
@@ -33,7 +33,7 @@ export default async function PortfolioOverview({
           >
             <h3 className={`${value.textColor} font-bold text-3xl`}>
               {
-                portfolio.filter((item) =>
+                projects.filter((item) =>
                   item.categories.includes(key as Category),
                 ).length
               }

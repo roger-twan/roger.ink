@@ -29,11 +29,11 @@ export const CategoryObj = {
   },
 };
 interface Link {
-  type: 'GitHub' | 'Figma' | 'Live' | 'Blog';
+  type: 'GitHub' | 'Figma' | 'Live' | 'Journal';
   url: string;
 }
 export type Category = keyof typeof CategoryObj;
-export interface Portfolio {
+export interface Project {
   title: string;
   categories: Category[];
   description: string;
@@ -43,33 +43,33 @@ export interface Portfolio {
   date: string;
 }
 
-let _data: Portfolio[] = [];
+let _data: Project[] = [];
 
-const _fetchPortfolio = async () => {
-  const result: Portfolio[] = [];
+const _fetchProjects = async () => {
+  const result: Project[] = [];
 
   const folderData = await fetchNotesRepo('/contents/{path}', {
-    path: 'Portfolio',
+    path: 'Projects',
   });
 
-  for (const portfolio of folderData.data) {
-    if (portfolio.name === '_index.md') continue;
+  for (const project of folderData.data) {
+    if (project.name === '_index.md') continue;
 
-    const portfolioData = await fetchNotesRepo(
+    const projectData = await fetchNotesRepo(
       '/contents/{path}',
       {
-        path: portfolio.path,
+        path: project.path,
       },
       {
         Accept: 'application/vnd.github.v3.raw',
       },
     );
 
-    const { content, metadata } = metadataParser(portfolioData.data);
+    const { content, metadata } = metadataParser(projectData.data);
 
     if (metadata) {
       const image = content.match(/!\[.*\]\((.*)\)/)?.[1] || '';
-      const title = portfolio.name.replace('.md', '');
+      const title = project.name.replace('.md', '');
       const links: Link[] = [];
 
       if (metadata['github-link']) {
@@ -79,10 +79,10 @@ const _fetchPortfolio = async () => {
         });
       }
 
-      if (metadata['blog-link']) {
+      if (metadata['journal-link']) {
         links.push({
-          type: 'Blog',
-          url: metadata['blog-link'],
+          type: 'Journal',
+          url: metadata['journal-link'],
         });
       }
 
@@ -112,17 +112,17 @@ const _fetchPortfolio = async () => {
     }
   }
 
-  _data = result.sort((a: Portfolio, b: Portfolio) =>
+  _data = result.sort((a: Project, b: Project) =>
     compareAsc(new Date(b.date), new Date(a.date)),
   );
 };
 
-const getPortfolio = async () => {
+const getProjects = async () => {
   if (!_data.length) {
-    await _fetchPortfolio();
+    await _fetchProjects();
   }
 
   return _data;
 };
 
-export default getPortfolio;
+export default getProjects;

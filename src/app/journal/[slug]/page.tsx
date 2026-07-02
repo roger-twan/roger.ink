@@ -4,11 +4,11 @@ import { format } from 'date-fns';
 import 'highlight.js/styles/github-dark-dimmed.css';
 import { getToc } from '@/utils/mdx';
 import GiscusComment from '@/components/Giscus';
-import getPosts, { Post } from '../blog.data';
+import getPosts, { Post } from '../journal.data';
 import Article from './article';
 import Toc from './toc';
 
-type BlogPostProps = {
+type JournalPostProps = {
   params: Promise<{ slug: string }>;
 };
 
@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: BlogPostProps): Promise<Metadata> {
+}: JournalPostProps): Promise<Metadata> {
   const { slug } = await params;
   const posts = await getPosts();
   const post: Post | undefined = posts.find(
@@ -35,12 +35,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${post.title} | Roger's Blog`,
+    title: `${post.title} | Roger's Journal`,
     description: post.description,
   };
 }
 
-export default async function BlogPost({ params }: BlogPostProps) {
+export default async function JournalPost({ params }: JournalPostProps) {
   const { slug } = await params;
   const posts = await getPosts();
   const post: Post | undefined = posts.find(

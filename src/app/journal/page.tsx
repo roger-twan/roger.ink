@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import IconChevronLeft from '@public/icons/chevron-left.svg';
 import IconChevronRight from '@public/icons/chevron-right.svg';
-import getPosts, { Post } from './blog.data';
-import BlogCard from './blog-card';
+import getPosts, { Post } from './journal.data';
+import JournalCard from './journal-card';
 
 const POSTS_PER_PAGE = 12;
 
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
   return allParams;
 }
 
-type BlogListProps = {
+type JournalListProps = {
   searchParams: Promise<{ page?: string; tag?: string }>;
 };
 
@@ -41,9 +41,9 @@ interface Tags {
 }
 
 export const metadata: Metadata = {
-  title: 'Blog | Roger Twan',
+  title: 'Journal | Roger Twan',
   description:
-    'Thoughts, tutorials, and updates about web development, photography, and more.',
+    'Notes and reflections on AI product engineering, full-stack systems, design, and experiments.',
 };
 
 const getTags = (posts: Post[]) => {
@@ -70,15 +70,15 @@ const getTags = (posts: Post[]) => {
   return tags;
 };
 
-export default async function BlogList({ searchParams }: BlogListProps) {
-  const blogPosts = await getPosts();
-  const tags = getTags(blogPosts);
+export default async function JournalList({ searchParams }: JournalListProps) {
+  const journalPosts = await getPosts();
+  const tags = getTags(journalPosts);
   const currentPage = Number((await searchParams).page) || 1;
   const selectedTag = (await searchParams).tag || '';
 
   const filteredPosts = selectedTag
-    ? blogPosts.filter((post) => post.tags.includes(selectedTag))
-    : blogPosts;
+    ? journalPosts.filter((post) => post.tags.includes(selectedTag))
+    : journalPosts;
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE) || 1;
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
@@ -104,13 +104,13 @@ export default async function BlogList({ searchParams }: BlogListProps) {
     const params = new URLSearchParams();
     if (tag) params.set('tag', tag);
     if (page > 1) params.set('page', page.toString());
-    return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+    return `/journal${params.toString() ? `?${params.toString()}` : ''}`;
   };
 
   const getTagUrl = (tag: string) => {
     const params = new URLSearchParams();
     params.set('tag', tag);
-    return `/blog?${params.toString()}`;
+    return `/journal?${params.toString()}`;
   };
 
   return (
@@ -120,11 +120,11 @@ export default async function BlogList({ searchParams }: BlogListProps) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center animate__animated animate__fadeInDown">
-              Blog
+              Journal
             </h1>
             <p className="text-lg mb-8 text-center max-w-2xl animate__animated animate__flipInX">
-              Thoughts, tutorials, and updates about design, development, and
-              other topics I&apos;m passionate about.
+              Notes and reflections on AI product engineering, full-stack
+              systems, design decisions, and experiments.
             </p>
           </div>
         </div>
@@ -136,7 +136,7 @@ export default async function BlogList({ searchParams }: BlogListProps) {
           <div className="mb-8">
             <div className="flex flex-wrap gap-2 justify-center">
               <Link
-                href="/blog"
+                href="/journal"
                 className={`px-3 py-1 rounded-full text-sm transition duration-300 ${
                   selectedTag === ''
                     ? 'bg-blue-600 text-white'
@@ -147,7 +147,7 @@ export default async function BlogList({ searchParams }: BlogListProps) {
                 <span
                   className={`ml-2 ${selectedTag === '' ? 'text-white/80' : 'text-gray-500'}`}
                 >
-                  {blogPosts.length}
+                  {journalPosts.length}
                 </span>
               </Link>
               {Object.entries(tags).map(([tag, count]) => (
@@ -171,11 +171,11 @@ export default async function BlogList({ searchParams }: BlogListProps) {
             </div>
           </div>
 
-          {/* Blog Posts */}
+          {/* Journal Posts */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {paginatedPosts.length > 0 ? (
               paginatedPosts.map((post) => (
-                <BlogCard key={post.slug} post={post} />
+                <JournalCard key={post.slug} post={post} />
               ))
             ) : (
               <div className="col-span-full text-center py-12">

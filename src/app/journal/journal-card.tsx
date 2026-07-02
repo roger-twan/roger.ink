@@ -2,12 +2,12 @@ import Link from 'next/link';
 import ClientImage from '@/components/ClientImage';
 import IconDocument from '@public/icons/document.svg';
 import { format } from 'date-fns';
-import { Post } from './blog.data';
+import { Post } from './journal.data';
 
-export default function BlogCard({ post }: { post: Post }) {
+export default function JournalCard({ post }: { post: Post }) {
   return (
     <article className="group bg-gray-100 rounded-lg shadow overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all duration-300">
-      <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
+      <Link href={`/journal/${post.slug}`} className="flex flex-col h-full">
         {post.thumbnail ? (
           <ClientImage className="h-64" src={post.thumbnail} alt={post.slug} />
         ) : (
