@@ -4,34 +4,52 @@ import IconDocument from '@public/icons/document.svg';
 import { format } from 'date-fns';
 import { Post } from './journal.data';
 
-export default function JournalCard({ post }: { post: Post }) {
+type JournalCardProps = {
+  post: Post;
+  index?: number;
+};
+
+export default function JournalCard({ post, index = 0 }: JournalCardProps) {
   return (
-    <article className="group bg-gray-100 rounded-lg shadow overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all duration-300">
-      <Link href={`/journal/${post.slug}`} className="flex flex-col h-full">
-        {post.thumbnail ? (
-          <ClientImage className="h-64" src={post.thumbnail} alt={post.slug} />
-        ) : (
-          <div className="h-64 bg-gray-200 flex items-center justify-center">
-            <IconDocument className="size-20 text-gray-500" />
-          </div>
-        )}
-        <div className="p-6 flex-1 flex flex-col">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-700">
+    <article
+      style={{ animationDelay: `${index * 70}ms` }}
+      data-reveal
+      className="reveal-on-scroll group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:border-cyan-200 hover:shadow-lg"
+    >
+      <Link
+        href={`/journal/${post.slug}`}
+        className="flex h-full flex-col md:flex-row"
+      >
+        <div className="md:w-60 lg:w-64">
+          {post.thumbnail ? (
+            <ClientImage
+              className="h-52 bg-neutral-100 md:h-full"
+              src={post.thumbnail}
+              alt={post.slug}
+            />
+          ) : (
+            <div className="flex h-52 items-center justify-center bg-neutral-100 md:h-full">
+              <IconDocument className="size-14 text-neutral-400" />
+            </div>
+          )}
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col p-6">
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-sm text-cyan-700">
               {format(new Date(post.date), 'LLL dd, yyyy')}
             </span>
           </div>
-          <div className="flex justify-between items-center mb-2">
-            <h6 className="font-bold text-lg mb-0">{post.title}</h6>
-          </div>
-          <p className="mb-3 text-gray-700 text-sm text-ellipsis line-clamp-3">
+          <h3 className="text-xl font-semibold tracking-tight text-neutral-950 transition group-hover:text-cyan-700">
+            {post.title}
+          </h3>
+          <p className="mt-3 line-clamp-3 text-sm leading-6 text-neutral-600">
             {post.description}
           </p>
-          <div className="flex gap-2 mt-auto">
-            {post.tags.map((tag, index) => (
+          <div className="mt-auto flex flex-wrap gap-2 pt-5">
+            {post.tags.map((tag) => (
               <span
-                key={index}
-                className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs font-medium"
+                key={tag}
+                className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700"
               >
                 {tag}
               </span>

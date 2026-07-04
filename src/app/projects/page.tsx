@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import RevealOnScroll from '@/components/RevealOnScroll';
+import SnapshotStatCard from '@/components/SnapshotStatCard';
 
-import ArchiveStatCard from './archive-stat-card';
 import getProjects from './projects.data';
 import ProjectsList from './list';
 
@@ -68,7 +68,7 @@ export default async function Projects() {
               </div>
               <div className="mt-5 grid grid-cols-2 gap-3">
                 {archiveStats.map((stat, index) => (
-                  <ArchiveStatCard
+                  <SnapshotStatCard
                     key={stat.label}
                     label={stat.label}
                     value={stat.value}

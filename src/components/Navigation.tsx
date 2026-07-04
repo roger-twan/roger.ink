@@ -61,7 +61,9 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const isActive = (path: string) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
   const startsOnDarkHero =
-    pathname.startsWith('/projects') || pathname === '/chat';
+    pathname.startsWith('/projects') ||
+    pathname.startsWith('/journal') ||
+    pathname === '/chat';
   const showDarkHeroNav = startsOnDarkHero && !scrolled && !isMobileMenuOpen;
 
   return (
