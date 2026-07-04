@@ -85,6 +85,30 @@
     );
   }
 
+  .toc-scrollbar {
+    scrollbar-color: rgba(8, 145, 178, 0.35) transparent;
+    scrollbar-width: thin;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(8, 145, 178, 0.32);
+    border: 2px solid rgb(245, 245, 245);
+    border-radius: 999px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(8, 145, 178, 0.48);
+  }
+
   @keyframes gradient-shift {
     0% {
       background-position: 0% 50%;
