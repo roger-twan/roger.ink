@@ -60,6 +60,9 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
   const isActive = (path: string) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
+  const startsOnDarkHero =
+    pathname.startsWith('/projects') || pathname === '/chat';
+  const showDarkHeroNav = startsOnDarkHero && !scrolled && !isMobileMenuOpen;
 
   return (
     <nav
@@ -68,7 +71,9 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
       className={`fixed top-0 w-full z-50 border-b transition-all duration-300 ${
         scrolled || isMobileMenuOpen
           ? 'border-neutral-200 bg-white/95 shadow-sm backdrop-blur'
-          : 'border-transparent bg-white/80 backdrop-blur'
+          : showDarkHeroNav
+            ? 'border-white/10 bg-neutral-950/20 backdrop-blur'
+            : 'border-transparent bg-white/80 backdrop-blur'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -78,7 +83,11 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
             aria-label="Roger Twan, homepage"
             className="hover:scale-110 transition-transform duration-300"
           >
-            <IconLogo width={40} height={40} />
+            <IconLogo
+              className={showDarkHeroNav ? 'text-white' : 'text-black'}
+              width={40}
+              height={40}
+            />
           </Link>
           <div className="flex md:hidden">
             <button
@@ -100,16 +109,22 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link text-sm font-medium text-neutral-600 hover:text-neutral-950 transition-colors duration-200 ${
-                  isActive(link.href) ? 'text-neutral-950' : ''
-                }`}
+                className={`nav-link text-sm font-medium transition-colors duration-200 ${
+                  showDarkHeroNav
+                    ? 'text-white/65 hover:text-white'
+                    : 'text-neutral-600 hover:text-neutral-950'
+                } ${isActive(link.href) ? (showDarkHeroNav ? 'text-white' : 'text-neutral-950') : ''}`}
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href={chatCta.href}
-              className="inline-flex items-center rounded-full bg-neutral-950 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-neutral-800"
+              className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 ${
+                showDarkHeroNav
+                  ? 'border border-white/15 bg-white/[0.06] text-white hover:border-cyan-300/50 hover:text-cyan-100'
+                  : 'bg-neutral-950 text-white hover:bg-neutral-800'
+              }`}
             >
               <IconChatbot className="mr-2 size-4" />
               {chatCta.label}

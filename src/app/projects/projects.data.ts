@@ -3,29 +3,41 @@ import metadataParser from 'markdown-yaml-metadata-parser';
 import { fetchNotesRepo } from '@/utils/octokit';
 
 export const CategoryObj = {
-  Web: {
-    name: 'Web Application',
-    textColor: 'text-yellow-600',
-    borderColor: 'border-yellow-600',
-    backgroundColor: 'bg-yellow-50',
-  },
-  Mobile: {
-    name: 'Mobile App',
-    textColor: 'text-green-600',
-    borderColor: 'border-green-600',
-    backgroundColor: 'bg-green-50',
-  },
-  Design: {
-    name: 'Design Project',
-    textColor: 'text-purple-600',
-    borderColor: 'border-purple-600',
-    backgroundColor: 'bg-purple-50',
-  },
-  Tool: {
-    name: 'Tool',
+  AI: {
+    name: 'AI System',
     textColor: 'text-cyan-600',
     borderColor: 'border-cyan-600',
     backgroundColor: 'bg-cyan-50',
+  },
+  Product: {
+    name: 'Product Build',
+    textColor: 'text-lime-700',
+    borderColor: 'border-lime-600',
+    backgroundColor: 'bg-lime-50',
+  },
+  Frontend: {
+    name: 'Frontend UI',
+    textColor: 'text-sky-600',
+    borderColor: 'border-sky-600',
+    backgroundColor: 'bg-sky-50',
+  },
+  Backend: {
+    name: 'Backend System',
+    textColor: 'text-indigo-600',
+    borderColor: 'border-indigo-600',
+    backgroundColor: 'bg-indigo-50',
+  },
+  Design: {
+    name: 'UX / Design',
+    textColor: 'text-fuchsia-600',
+    borderColor: 'border-fuchsia-600',
+    backgroundColor: 'bg-fuchsia-50',
+  },
+  Tool: {
+    name: 'Developer Tool',
+    textColor: 'text-emerald-700',
+    borderColor: 'border-emerald-600',
+    backgroundColor: 'bg-emerald-50',
   },
 };
 interface Link {
@@ -48,6 +60,8 @@ let _data: Project[] = [];
 
 const isFeaturedProject = (value: unknown) =>
   value === true || String(value).toLowerCase() === 'true';
+
+const isCategory = (value: string): value is Category => value in CategoryObj;
 
 const _fetchProjects = async () => {
   const result: Project[] = [];
@@ -107,7 +121,7 @@ const _fetchProjects = async () => {
       result.push({
         title: title,
         image: image,
-        categories: metadata.categories || [],
+        categories: (metadata.categories || []).filter(isCategory),
         description: metadata.description || '',
         technologies: metadata.technologies || [],
         links: links,

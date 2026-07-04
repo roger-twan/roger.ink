@@ -1,111 +1,177 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import IconLive from '@public/icons/live.svg';
-import IconGithub from '@public/icons/github.svg';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import IconFigma from '@public/icons/figma.svg';
+import IconGithub from '@public/icons/github.svg';
 import IconJournal from '@public/icons/journal.svg';
+import IconLive from '@public/icons/live.svg';
 import ClientImage from '@/components/ClientImage';
-import { Project, Category, CategoryObj } from './projects.data';
+import { Category, CategoryObj, Project } from './projects.data';
 
-const svgClasses = 'size-4 mr-1';
+const iconClasses = 'mr-1.5 size-4';
 export const LinkTypeIconMap = {
-  GitHub: <IconGithub className={svgClasses} />,
-  Journal: <IconJournal className={svgClasses} />,
-  Figma: <IconFigma className={svgClasses} />,
-  Live: <IconLive className={svgClasses} />,
+  GitHub: <IconGithub className={iconClasses} />,
+  Journal: <IconJournal className={iconClasses} />,
+  Figma: <IconFigma className={iconClasses} />,
+  Live: <IconLive className={iconClasses} />,
 };
 
-export default function ProjectsList({ projects }: { projects: Project[] }) {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+const categoryKeys = Object.keys(CategoryObj) as Category[];
 
-  useEffect(() => {
+export default function ProjectsList({ projects }: { projects: Project[] }) {
+  const projectGridRef = useRef<HTMLDivElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | 'All'>(
+    'All',
+  );
+
+  const filteredProjects = useMemo(() => {
     if (selectedCategory === 'All') {
-      setFilteredProjects(projects);
-    } else {
-      setFilteredProjects(
-        projects.filter((item) =>
-          item.categories.includes(selectedCategory as Category),
-        ),
-      );
+      return projects;
     }
+
+    return projects.filter((project) =>
+      project.categories.includes(selectedCategory),
+    );
   }, [selectedCategory, projects]);
 
+  useEffect(() => {
+    const projectCards =
+      projectGridRef.current?.querySelectorAll<HTMLElement>('[data-reveal]');
+
+    projectCards?.forEach((card) => {
+      card.removeAttribute('data-revealed');
+    });
+
+    window.dispatchEvent(new Event('reveal:refresh'));
+  }, [filteredProjects.length, selectedCategory]);
+
   return (
-    <>
-      <div className="flex flex-col items-center mb-12">
-        <h2 className="text-3xl font-bold mb-4 text-center">All Projects</h2>
-        <div className="text-center max-w-full overflow-x-auto">
-          <div className="inline-flex rounded-md shadow-sm border border-gray-200 overflow-hidden">
+    <div>
+      <div
+        data-reveal
+        className="reveal-on-scroll mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+      >
+        <div>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-600">
+            All projects
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl">
+            Browse the work.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-neutral-600">
+            Filter by project type, then inspect the screenshots, technology
+            stack, and proof links behind each build.
+          </p>
+        </div>
+        <div className="max-w-3xl">
+          <div className="flex flex-wrap gap-2 rounded-2xl border border-neutral-200 bg-neutral-50 p-1.5 shadow-sm">
             <button
-              className={`px-4 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-100 border-r border-gray-200 cursor-pointer ${selectedCategory === 'All' ? 'bg-gray-100' : 'bg-white'}`}
+              type="button"
+              className={`cursor-pointer rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                selectedCategory === 'All'
+                  ? 'bg-neutral-950 text-white shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-950'
+              }`}
               onClick={() => setSelectedCategory('All')}
             >
               All
             </button>
-            {Object.entries(CategoryObj).map(([key, value]) => (
+            {categoryKeys.map((category) => (
               <button
-                key={key}
-                className={`px-4 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-100 border-r border-gray-200 cursor-pointer ${selectedCategory === key ? 'bg-gray-100' : 'bg-white'}`}
-                onClick={() => setSelectedCategory(key as Category)}
+                key={category}
+                type="button"
+                className={`cursor-pointer rounded-xl px-4 py-2 text-sm font-semibold transition ${
+                  selectedCategory === category
+                    ? 'bg-neutral-950 text-white shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-950'
+                }`}
+                onClick={() => setSelectedCategory(category)}
               >
-                {value.name}s
+                {CategoryObj[category].name}
               </button>
             ))}
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {filteredProjects.map((item) => (
-          <div
-            key={item.title}
-            className="group bg-gray-100 rounded-lg shadow flex flex-col overflow-hidden hover:-translate-y-2 hover:shadow-lg transition-all duration-300"
-          >
-            <ClientImage className="h-64" src={item.image} alt={item.title} />
-            <div className="p-6 flex-1 flex flex-col">
-              <div className="flex justify-between items-center mb-2">
-                <h6 className="font-bold text-lg mb-0">{item.title}</h6>
-                <div className="flex justify-end gap-1">
-                  {item.categories.map((category, index) => (
+
+      {filteredProjects.length > 0 ? (
+        <div
+          ref={projectGridRef}
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
+        >
+          {filteredProjects.map((project, index) => (
+            <article
+              key={project.title}
+              style={{ animationDelay: `${index * 70}ms` }}
+              data-reveal
+              className="reveal-on-scroll group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            >
+              <div className="relative">
+                <ClientImage
+                  className="h-64 bg-neutral-100"
+                  src={project.image}
+                  alt={project.title}
+                />
+                {project.featured && (
+                  <span className="absolute left-4 top-4 rounded-full border border-cyan-200 bg-cyan-50/95 px-3 py-1 text-xs font-semibold text-cyan-700 shadow-sm">
+                    Featured
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-wrap gap-2">
+                  {project.categories.map((category) => (
                     <span
-                      key={index}
-                      className={`${CategoryObj[category].textColor} border ${CategoryObj[category].borderColor} ${CategoryObj[category].backgroundColor} px-1 py-0.5 rounded-full text-xs`}
+                      key={category}
+                      className={`${CategoryObj[category].textColor} ${CategoryObj[category].borderColor} ${CategoryObj[category].backgroundColor} rounded-full border px-2.5 py-1 text-xs font-semibold`}
                     >
-                      {category}
+                      {CategoryObj[category].name}
                     </span>
                   ))}
                 </div>
+                <h3 className="mt-4 text-xl font-semibold text-neutral-950">
+                  {project.title}
+                </h3>
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-neutral-600">
+                  {project.description}
+                </p>
+                {project.technologies.length > 0 && (
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {project.links.length > 0 && (
+                  <div className="mt-auto flex flex-wrap gap-2 pt-6">
+                    {project.links.map((link) => (
+                      <a
+                        className="inline-flex items-center rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-semibold text-neutral-800 shadow-sm transition hover:border-cyan-300 hover:text-cyan-700"
+                        target="_blank"
+                        href={link.url}
+                        rel="noreferrer"
+                        key={link.type}
+                      >
+                        {LinkTypeIconMap[link.type]}
+                        {link.type}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="mb-3 flex flex-wrap gap-2">
-                {item.technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <p className="mb-2 text-gray-700 text-sm">{item.description}</p>
-              <div className="flex flex-wrap gap-1 mt-auto">
-                {item.links.map((item) => (
-                  <a
-                    className="inline-flex items-center py-1 px-2 rounded-full border border-gray-300 bg-white text-sm  hover:bg-gray-200 transition"
-                    target="_blank"
-                    href={item.url}
-                    rel="noreferrer"
-                    key={item.type}
-                  >
-                    {LinkTypeIconMap[item.type]}
-                    {item.type}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-2xl border border-dashed border-neutral-300 bg-neutral-50 p-8 text-center text-neutral-600">
+          No projects match this filter yet.
+        </div>
+      )}
+    </div>
   );
 }
