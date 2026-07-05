@@ -78,7 +78,7 @@
 - [New Feature] Post comments support
 - [New Feature] GitHub Webhook handler
 - [Improvement] Redesign the interface and upgrade Next.js to v15
-- [Improvement] Add sitemap and robots.txt, [SEO Integration](https://github.com/roger-twan/website/issues/34)
+- [Improvement] Add sitemap and robots.txt, [SEO Integration](https://github.com/roger-twan/roger.ink/issues/34)
 - [Improvement] Add dynamic portfolio and skills data fetching from Obsidian
 
 ## 3.4.2 (2025-06-10)
@@ -102,8 +102,8 @@
 
 ## 3.2.0 (2024-12-26)
 
-- [Improvement] [Add loading to the homepage](https://github.com/roger-twan/website/issues/27)
-- [Improvement] [Display menu on the homepage instead of the value](https://github.com/roger-twan/website/issues/21)
+- [Improvement] [Add loading to the homepage](https://github.com/roger-twan/roger.ink/issues/27)
+- [Improvement] [Display menu on the homepage instead of the value](https://github.com/roger-twan/roger.ink/issues/21)
 - [Bugfix] Fix len model display issue
 
 ## 3.1.3 (2024-12-22)
@@ -116,7 +116,7 @@
 
 ## 3.1.1 (2024-09-28)
 
-- [Improvement] [Optimize the photos quality in the Gallery page](https://github.com/roger-twan/website/issues/24)
+- [Improvement] [Optimize the photos quality in the Gallery page](https://github.com/roger-twan/roger.ink/issues/24)
 - [Improvement] Upgrade Next.js version to v14
 
 ## 3.1.0 (2024-09-22)
@@ -137,7 +137,7 @@
 
 ## 3.0.1 (2024-09-03)
 
-- [Bug fix] [Fix menu disappear animation](https://github.com/roger-twan/website/issues/20)
+- [Bug fix] [Fix menu disappear animation](https://github.com/roger-twan/roger.ink/issues/20)
 
 ## 3.0.0 (2024-09-02)
 

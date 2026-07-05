@@ -10,11 +10,11 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/dynamic/json?label=Version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Fwebsite%2Fmain%2Fpackage.json&color=cyan" alt="Version">
-  <img src="https://img.shields.io/badge/dynamic/json?label=Node&query=engines.node&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Fwebsite%2Fmain%2Fpackage.json&color=purple" alt="Node version">
-  <img src="https://img.shields.io/badge/dynamic/json?label=NPM&query=engines.npm&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Fwebsite%2Fmain%2Fpackage.json&color=purple" alt="NPM version">
-  <img src="https://img.shields.io/badge/dynamic/json?label=Next&query=dependencies.next&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Fwebsite%2Fmain%2Fpackage.json" alt="Next.js version">
-  <img src="https://img.shields.io/badge/dynamic/json?label=Tailwind&query=devDependencies.tailwindcss&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Fwebsite%2Fmain%2Fpackage.json" alt="Tailwind CSS version">
+  <img src="https://img.shields.io/badge/dynamic/json?label=Version&query=version&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Froger.ink%2Fmain%2Fpackage.json&color=cyan" alt="Version">
+  <img src="https://img.shields.io/badge/dynamic/json?label=Node&query=engines.node&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Froger.ink%2Fmain%2Fpackage.json&color=purple" alt="Node version">
+  <img src="https://img.shields.io/badge/dynamic/json?label=NPM&query=engines.npm&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Froger.ink%2Fmain%2Fpackage.json&color=purple" alt="NPM version">
+  <img src="https://img.shields.io/badge/dynamic/json?label=Next&query=dependencies.next&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Froger.ink%2Fmain%2Fpackage.json" alt="Next.js version">
+  <img src="https://img.shields.io/badge/dynamic/json?label=Tailwind&query=devDependencies.tailwindcss&url=https%3A%2F%2Fraw.githubusercontent.com%2Froger-twan%2Froger.ink%2Fmain%2Fpackage.json" alt="Tailwind CSS version">
 </p>
 
 ---

@@ -1,4 +1,4 @@
-# Website Revamp Spec
+# Roger.ink Revamp Spec
 
 ## Positioning
 
@@ -26,7 +26,7 @@ Generated visual references:
 ## Navigation
 
 ```text
-Roger Twan Website
+Roger.ink
 ├── Home
 ├── Projects
 ├── Journal
@@ -119,7 +119,7 @@ Consistency should cover:
 ## Page Tree And Sections
 
 ```text
-Roger Twan Website
+Roger.ink
 ├── Home
 │   ├── Hero
 │   │   ├── AI-assisted product-building positioning
