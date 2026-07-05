@@ -10,6 +10,8 @@ import IconLogo from '@public/logo.svg';
 
 import { chatCta, navLinks } from './Footer';
 
+const darkHeroRoutes = ['/projects', '/journal', '/about', '/contact'];
+
 export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -61,9 +63,7 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const isActive = (path: string) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
   const startsOnDarkHero =
-    pathname.startsWith('/projects') ||
-    pathname.startsWith('/journal') ||
-    pathname.startsWith('/about') ||
+    darkHeroRoutes.some((route) => pathname.startsWith(route)) ||
     pathname === '/chat';
   const showDarkHeroNav = startsOnDarkHero && !scrolled && !isMobileMenuOpen;
 

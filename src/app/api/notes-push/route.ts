@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import wechatSync from './wechat-sync';
 
-const WEBSITE_BUILD_TRIGGER_PATHS = ['Technical/', 'Projects/', 'Skills'];
+const WEBSITE_BUILD_TRIGGER_PATHS = ['Technical/', 'Projects/'];
 const WECHAT_TRIGGER_PATHS = ['General/', 'Living/', 'Reading/'];
 
 export async function POST(request: NextRequest) {
