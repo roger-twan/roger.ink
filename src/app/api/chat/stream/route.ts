@@ -20,17 +20,16 @@ export async function POST(request: NextRequest) {
     }
 
     const apiToken = process.env.RAG_PUBLIC_API_TOKEN;
-    if (!apiToken) {
-      console.error('RAG_PUBLIC_API_TOKEN is not configured');
+    const ragApiHost = process.env.RAG_API_HOST;
+    if (!apiToken || !ragApiHost) {
+      console.error('RAG API configuration is not configured');
       return NextResponse.json(
         { error: 'Service configuration error' },
         { status: 500 },
       );
     }
 
-    const ragUrl = new URL(
-      'https://rag-server-670104242751.us-central1.run.app/api/query/stream',
-    );
+    const ragUrl = new URL('/api/query/stream', ragApiHost);
     ragUrl.searchParams.set('q', message);
     if (conversationId) {
       ragUrl.searchParams.set('conversation_id', conversationId);

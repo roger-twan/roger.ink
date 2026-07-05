@@ -49,7 +49,7 @@ Projects, journal entries, and portfolio context are maintained in my Obsidian w
 
 ## Development
 
-Create a `.env` file in the project root and add the required environment variables, including `GITHUB_TOKEN` when fetching GitHub-backed content.
+Copy the `_env` template file to `.env`, then configure the correct values for the required environment variables.
 
 ```bash
 npm install
