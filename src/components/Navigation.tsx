@@ -10,7 +10,7 @@ import IconLogo from '@public/logo.svg';
 
 import { chatCta, navLinks } from './Footer';
 
-const darkHeroRoutes = ['/projects', '/journal', '/about', '/contact'];
+const darkHeroRoutes = ['/projects', '/journal', '/about', '/contact', '/chat'];
 
 export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
@@ -62,9 +62,9 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
   const isActive = (path: string) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
-  const startsOnDarkHero =
-    darkHeroRoutes.some((route) => pathname.startsWith(route)) ||
-    pathname === '/chat';
+  const startsOnDarkHero = darkHeroRoutes.some((route) =>
+    pathname.startsWith(route),
+  );
   const showDarkHeroNav = startsOnDarkHero && !scrolled && !isMobileMenuOpen;
 
   return (

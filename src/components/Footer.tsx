@@ -21,7 +21,7 @@ export const navLinks: NavItem[] = [
 
 export const chatCta: NavItem = {
   href: '/chat',
-  label: 'Chat with my AI assistant',
+  label: "Chat with Roger's AI",
 };
 
 export default function Footer(props: React.HTMLAttributes<HTMLElement>) {

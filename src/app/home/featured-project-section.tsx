@@ -121,12 +121,12 @@ export default function FeaturedProjectSection() {
             </div>
 
             <h3 className="text-3xl font-semibold tracking-tight text-white">
-              RAG-powered AI Assistant
+              Roger&apos;s AI, powered by RAG
             </h3>
             <p className="mt-4 text-base leading-7 text-white/65">
               I built a retrieval-augmented system that connects my portfolio,
-              project notes, and technical writing to a conversational
-              assistant. Behind the interface, it handles ingestion, retrieval,
+              project notes, and technical writing to a conversational version
+              of me. Behind the interface, it handles ingestion, retrieval,
               reranking, conversation context, and streaming responses.
             </p>
 

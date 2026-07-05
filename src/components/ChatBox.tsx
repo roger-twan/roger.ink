@@ -284,7 +284,7 @@ export default function ChatBox({
       <div className="flex flex-shrink-0 items-center justify-between border-b border-white/10 bg-neutral-900 px-4 py-3 text-white">
         <div className="flex items-center gap-2">
           <div className="animate-workflow-pulse size-2 rounded-full bg-cyan-400"></div>
-          <h2 className="font-semibold">Roger&apos;s AI Assistant</h2>
+          <h2 className="font-semibold">Roger&apos;s AI</h2>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -355,7 +355,7 @@ export default function ChatBox({
                   ) : (
                     <Image
                       src={AvatarSmall}
-                      alt="AI Assistant"
+                      alt="Roger's AI"
                       width={32}
                       height={32}
                       className="rounded-full"

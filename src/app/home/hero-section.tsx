@@ -38,7 +38,7 @@ export default function HeroSection() {
               className="inline-flex items-center justify-center rounded-xl border border-cyan-300/40 bg-cyan-50 px-5 py-3 text-sm font-semibold text-cyan-950 shadow-sm shadow-cyan-900/5 transition hover:-translate-y-0.5 hover:border-cyan-400 hover:bg-cyan-100"
             >
               <IconChatbot className="mr-2 size-5" />
-              Chat with my AI assistant
+              Chat with Roger&apos;s AI
             </Link>
             <a
               href="https://github.com/roger-twan"

@@ -36,7 +36,7 @@ export default function ChatWidget() {
           <span className="flex size-7 items-center justify-center rounded-lg bg-cyan-300/15 text-cyan-100 transition group-hover:bg-cyan-300/25">
             <IconChatbot className="size-4" />
           </span>
-          Chat with My AI Assistant
+          Chat with Roger&apos;s AI
         </span>
       </button>
 

@@ -94,10 +94,10 @@ export default function Contact() {
                 Reach me
               </p>
               <h2 className="text-3xl font-semibold tracking-tight text-neutral-950 md:text-4xl">
-                Send a note, or start with my AI assistant.
+                Send a note, or start with Roger&apos;s AI.
               </h2>
               <p className="mt-5 max-w-xl text-base leading-7 text-neutral-600">
-                For a quick overview of my work, the AI assistant can answer
+                For a quick overview of my work, Roger&apos;s AI can answer
                 questions from my portfolio, projects, and writing. For direct
                 conversations, email or the form works best.
               </p>
@@ -138,7 +138,7 @@ export default function Contact() {
                 className="mt-4 inline-flex items-center justify-center rounded-xl bg-neutral-950 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-neutral-950/10 transition hover:-translate-y-0.5 hover:bg-neutral-800"
               >
                 <IconChatbot className="mr-2 size-5" />
-                Chat with my AI assistant
+                Chat with Roger&apos;s AI
               </a>
             </aside>
 

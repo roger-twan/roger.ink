@@ -56,7 +56,7 @@ describe('Navigation', () => {
     ).toBeGreaterThan(0);
     expect(
       screen.getAllByRole('link', {
-        name: /Chat with my AI assistant/i,
+        name: /Chat with Roger's AI/i,
       }).length,
     ).toBeGreaterThan(0);
   });

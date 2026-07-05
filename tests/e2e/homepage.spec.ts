@@ -20,7 +20,7 @@ test.describe('Homepage', () => {
       page.getByRole('link', { name: /Journal/i }).first(),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /Chat with my AI assistant/i }).first(),
+      page.getByRole('link', { name: /Chat with Roger's AI/i }).first(),
     ).toBeVisible();
   });
 
