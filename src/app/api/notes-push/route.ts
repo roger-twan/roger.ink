@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import wechatSync from './wechat-sync';
 
-const BLOG_TRIGGER_PATHS = ['Technical/', 'Portfolio/', 'Skills'];
+const WEBSITE_BUILD_TRIGGER_PATHS = ['Technical/', 'Projects/'];
 const WECHAT_TRIGGER_PATHS = ['General/', 'Living/', 'Reading/'];
 
 export async function POST(request: NextRequest) {
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     if (
       websiteFiles.some((file: string) =>
-        BLOG_TRIGGER_PATHS.some((path: string) => file.includes(path)),
+        WEBSITE_BUILD_TRIGGER_PATHS.some((path: string) => file.includes(path)),
       )
     ) {
       await fetch(

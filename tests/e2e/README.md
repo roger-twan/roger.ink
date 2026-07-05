@@ -12,7 +12,7 @@ Streamlined end-to-end tests for the Roger Twan website using Playwright.
   - Logo link functionality
 
 - **`navigation.spec.ts`** (7 tests)
-  - Navigation to all pages (About, Portfolio, Blog, Contact)
+  - Navigation to all pages (About, Projects, Journal, Contact)
   - Navigation menu presence on all pages
   - Footer presence on all pages
 

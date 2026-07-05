@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Accessibility', () => {
   test('all pages should have proper heading hierarchy', async ({ page }) => {
-    const pages = ['/', '/about', '/portfolio', '/blog', '/contact'];
+    const pages = ['/', '/about', '/projects', '/journal', '/contact'];
 
     for (const path of pages) {
       await page.goto(path);

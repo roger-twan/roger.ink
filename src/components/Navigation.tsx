@@ -1,13 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import IconMenu from '@public/icons/menu.svg';
 import IconClose from '@public/icons/close.svg';
+import IconChatbot from '@public/icons/chatbot.svg';
+import IconLogo from '@public/logo.svg';
 
-import { navLinks } from './Footer';
+import { chatCta, navLinks } from './Footer';
+
+const darkHeroRoutes = ['/projects', '/journal', '/about', '/contact', '/chat'];
 
 export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const pathname = usePathname();
@@ -59,13 +62,21 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
   const toggleMobileMenu = () => setMobileMenuOpen(!isMobileMenuOpen);
   const isActive = (path: string) =>
     path === '/' ? pathname === '/' : pathname.startsWith(path);
+  const startsOnDarkHero = darkHeroRoutes.some((route) =>
+    pathname.startsWith(route),
+  );
+  const showDarkHeroNav = startsOnDarkHero && !scrolled && !isMobileMenuOpen;
 
   return (
     <nav
       {...props}
       ref={navRef}
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled || isMobileMenuOpen ? 'bg-black shadow-md' : 'bg-transparent'
+      className={`fixed top-0 w-full z-50 border-b transition-all duration-300 ${
+        scrolled || isMobileMenuOpen
+          ? 'border-neutral-200 bg-white/95 shadow-sm backdrop-blur'
+          : showDarkHeroNav
+            ? 'border-white/10 bg-neutral-950/20 backdrop-blur'
+            : 'border-transparent bg-white/80 backdrop-blur'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -75,11 +86,15 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
             aria-label="Roger Twan, homepage"
             className="hover:scale-110 transition-transform duration-300"
           >
-            <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+            <IconLogo
+              className={showDarkHeroNav ? 'text-white' : 'text-black'}
+              width={40}
+              height={40}
+            />
           </Link>
           <div className="flex md:hidden">
             <button
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-neutral-950"
               aria-controls="mobile-menu"
               aria-expanded={isMobileMenuOpen}
               onClick={toggleMobileMenu}
@@ -97,13 +112,26 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`nav-link text-gray-300 hover:text-white transition-colors duration-200 ${
-                  isActive(link.href) ? 'text-white border-b' : ''
-                }`}
+                className={`nav-link text-sm font-medium transition-colors duration-200 ${
+                  showDarkHeroNav
+                    ? 'text-white/65 hover:text-white'
+                    : 'text-neutral-600 hover:text-neutral-950'
+                } ${isActive(link.href) ? (showDarkHeroNav ? 'text-white' : 'text-neutral-950') : ''}`}
               >
                 {link.label}
               </Link>
             ))}
+            <Link
+              href={chatCta.href}
+              className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 ${
+                showDarkHeroNav
+                  ? 'border border-white/15 bg-white/[0.06] text-white hover:border-cyan-300/50 hover:text-cyan-100'
+                  : 'bg-neutral-950 text-white hover:bg-neutral-800'
+              }`}
+            >
+              <IconChatbot className="mr-2 size-4" />
+              {chatCta.label}
+            </Link>
           </div>
         </div>
       </div>
@@ -111,7 +139,7 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
       {/* Mobile menu */}
       <div
         id="mobile-menu"
-        className="md:hidden overflow-hidden transition-[max-height] duration-200 ease-in-out bg-black bg-opacity-90"
+        className="md:hidden overflow-hidden transition-[max-height] duration-200 ease-in-out bg-white border-t border-neutral-200"
         style={{ maxHeight: `${menuHeight}px` }}
         ref={mobileMenuRef}
       >
@@ -120,14 +148,22 @@ export default function Navigation(props: React.HTMLAttributes<HTMLElement>) {
             <Link
               key={link.href}
               href={link.href}
-              className={`block px-3 py-2 rounded-md text-base text-center font-medium text-gray-300 hover:text-white hover:bg-neutral-800 transition-colors duration-300 ${
-                isActive(link.href) ? 'text-white bg-neutral-800' : ''
+              className={`block px-3 py-2 rounded-md text-base text-center font-medium text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors duration-300 ${
+                isActive(link.href) ? 'text-neutral-950 bg-neutral-100' : ''
               }`}
               onClick={toggleMobileMenu}
             >
               {link.label}
             </Link>
           ))}
+          <Link
+            href={chatCta.href}
+            className="mt-3 flex items-center justify-center rounded-xl bg-neutral-950 px-4 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800"
+            onClick={toggleMobileMenu}
+          >
+            <IconChatbot className="mr-2 size-4" />
+            {chatCta.label}
+          </Link>
         </div>
       </div>
     </nav>

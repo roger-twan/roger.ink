@@ -279,17 +279,17 @@ export default function ChatBox({
   if (!isOpen) return null;
 
   return (
-    <div className="flex flex-col bg-white h-full w-full">
+    <div className="flex h-full w-full flex-col bg-neutral-950 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r  from-purple-700 to-blue-600 text-white flex-shrink-0">
+      <div className="flex flex-shrink-0 items-center justify-between border-b border-white/10 bg-neutral-900 px-4 py-3 text-white">
         <div className="flex items-center gap-2">
-          <div className="size-2 bg-green-400 rounded-full animate-pulse"></div>
-          <h2 className="font-semibold">Roger&apos;s AI Assistant</h2>
+          <div className="animate-workflow-pulse size-2 rounded-full bg-cyan-400"></div>
+          <h2 className="font-semibold">Roger&apos;s AI</h2>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={clearChat}
-            className="px-3 py-1 text-xs bg-white/20 hover:bg-white/30 rounded transition-colors cursor-pointer"
+            className="cursor-pointer rounded border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-white/70 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-100"
             title="Clear chat"
           >
             Clear
@@ -297,7 +297,7 @@ export default function ChatBox({
           {!embedded && onClose && (
             <button
               onClick={onClose}
-              className="p-1 hover:bg-white/20 rounded transition-colors"
+              className="rounded p-1 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Close"
             >
               <IconClose className="size-5 cursor-pointer" />
@@ -309,25 +309,25 @@ export default function ChatBox({
       {/* Messages */}
       <div
         ref={messagesContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 min-h-0"
+        className="chat-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto bg-neutral-950 p-4"
       >
         {!isLoaded ? (
           <div className="flex items-center justify-center h-full">
             <div className="flex gap-1">
-              <div className="size-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div className="size-2 bg-cyan-300 rounded-full animate-bounce"></div>
               <div
-                className="size-2 bg-gray-400 rounded-full animate-bounce"
+                className="size-2 bg-lime-300 rounded-full animate-bounce"
                 style={{ animationDelay: '0.1s' }}
               ></div>
               <div
-                className="size-2 bg-gray-400 rounded-full animate-bounce"
+                className="size-2 bg-amber-300 rounded-full animate-bounce"
                 style={{ animationDelay: '0.2s' }}
               ></div>
             </div>
           </div>
         ) : messages.length === 0 ? (
-          <div className="text-center text-gray-400 py-8">
-            <IconChatbot className="size-12 mx-auto mb-3 text-black opacity-50" />
+          <div className="py-8 text-center text-white/45">
+            <IconChatbot className="mx-auto mb-3 size-12 text-cyan-200 opacity-70" />
             <p>
               No messages yet.
               <br />
@@ -349,13 +349,13 @@ export default function ChatBox({
               >
                 <div className="flex-shrink-0">
                   {message.role === 'user' ? (
-                    <div className="size-8 rounded-full bg-gray-300 flex items-center justify-center">
-                      <IconUser className="size-5 text-gray-500" />
+                    <div className="flex size-8 items-center justify-center rounded-full bg-cyan-300/15 ring-1 ring-cyan-300/25">
+                      <IconUser className="size-5 text-cyan-100" />
                     </div>
                   ) : (
                     <Image
                       src={AvatarSmall}
-                      alt="AI Assistant"
+                      alt="Roger's AI"
                       width={32}
                       height={32}
                       className="rounded-full"
@@ -365,8 +365,8 @@ export default function ChatBox({
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                     message.role === 'user'
-                      ? 'bg-blue-600 text-white rounded-br-sm'
-                      : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
+                      ? 'bg-cyan-300 text-neutral-950 rounded-br-sm shadow-lg shadow-cyan-950/20'
+                      : 'bg-white/[0.06] border border-white/10 text-white/85 rounded-bl-sm shadow-sm'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap text-left">
@@ -376,8 +376,8 @@ export default function ChatBox({
                     <span
                       className={`text-xs mt-1 block ${
                         message.role === 'user'
-                          ? 'text-blue-200 text-right'
-                          : 'text-gray-400 text-left'
+                          ? 'text-cyan-900/60 text-right'
+                          : 'text-white/35 text-left'
                       }`}
                     >
                       {formatTime(message.timestamp)}
@@ -389,25 +389,16 @@ export default function ChatBox({
           })
         )}
         {isAwaitingResponse && (
-          <div className="flex gap-2 flex-row">
-            <div className="flex-shrink-0">
-              <Image
-                src={AvatarSmall}
-                alt="AI Assistant"
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            </div>
-            <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm">
+          <div className="flex justify-start">
+            <div className="rounded-2xl rounded-bl-sm border border-white/10 bg-white/[0.06] px-4 py-3 shadow-sm">
               <div className="flex gap-1">
-                <div className="size-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div className="size-2 bg-cyan-300 rounded-full animate-bounce"></div>
                 <div
-                  className="size-2 bg-gray-400 rounded-full animate-bounce"
+                  className="size-2 bg-lime-300 rounded-full animate-bounce"
                   style={{ animationDelay: '0.1s' }}
                 ></div>
                 <div
-                  className="size-2 bg-gray-400 rounded-full animate-bounce"
+                  className="size-2 bg-amber-300 rounded-full animate-bounce"
                   style={{ animationDelay: '0.2s' }}
                 ></div>
               </div>
@@ -420,7 +411,7 @@ export default function ChatBox({
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="p-4 border-t border-gray-200 bg-white flex-shrink-0"
+        className="flex-shrink-0 border-t border-white/10 bg-neutral-900 p-4"
       >
         <div className="flex gap-2">
           <textarea
@@ -430,13 +421,13 @@ export default function ChatBox({
             onKeyDown={handleKeyDown}
             placeholder="Type a message... (Enter to send, Shift+Enter for new line)"
             rows={1}
-            className="flex-1 resize-none px-4 py-2 text-sm text-black placeholder-gray-500 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-h-[40px] max-h-[100px] leading-5 [field-sizing:content]"
+            className="min-h-[40px] max-h-[100px] flex-1 resize-none rounded-lg border border-white/10 bg-white/[0.06] px-4 py-2 text-sm leading-5 text-white placeholder-white/35 focus:border-cyan-300/60 focus:outline-none focus:ring-2 focus:ring-cyan-300/20 [field-sizing:content]"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg shadow hover:bg-gradient-to-br hover:from-blue-600 hover:to-purple-700 transition-all duration-300 flex items-center cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+            className="flex flex-shrink-0 cursor-pointer items-center rounded-lg bg-cyan-300 px-4 py-2 font-semibold text-neutral-950 shadow-lg shadow-cyan-950/20 transition-all duration-300 hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <IconChatSend className="size-5" />
           </button>

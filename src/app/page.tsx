@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import home from './home/index';
 
 export const metadata: Metadata = {
-  title: 'Roger Twan',
+  title: 'Roger Twan | Full-Stack Product Engineer',
   description:
-    'A passionate full stack developer with extensive experience building compelling web platforms, mobile applications, and interactive digital solutions.',
+    'Building thoughtful software products with AI as a force multiplier.',
 };
 
 export default home;

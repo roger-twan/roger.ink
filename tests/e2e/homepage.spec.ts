@@ -6,7 +6,7 @@ test.describe('Homepage', () => {
   }) => {
     await page.goto('/');
 
-    await expect(page).toHaveTitle(/Roger Twan/i);
+    await expect(page).toHaveTitle(/Roger Twan | Full-Stack Product Engineer/i);
     await expect(
       page.getByRole('link', { name: /Home/i }).first(),
     ).toBeVisible();
@@ -14,7 +14,13 @@ test.describe('Homepage', () => {
       page.getByRole('link', { name: /About/i }).first(),
     ).toBeVisible();
     await expect(
-      page.getByRole('link', { name: /Portfolio/i }).first(),
+      page.getByRole('link', { name: /Projects/i }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Journal/i }).first(),
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: /Chat with Roger's AI/i }).first(),
     ).toBeVisible();
   });
 
