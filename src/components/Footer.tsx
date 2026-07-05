@@ -1,10 +1,12 @@
 import Link from 'next/link';
 
 import IconEmail from '@public/icons/email.svg';
+import IconFacebook from '@public/icons/facebook.svg';
+import IconGithub from '@public/icons/github.svg';
+import IconInstagram from '@public/icons/instagram.svg';
+import IconLinkedin from '@public/icons/linkedin.svg';
 import IconPhone from '@public/icons/phone.svg';
 import IconLogo from '@public/logo.svg';
-
-import { socialLinks } from './SocialMedia';
 
 interface NavItem {
   href: string;
@@ -23,6 +25,29 @@ export const chatCta: NavItem = {
   href: '/chat',
   label: "Chat with Roger's AI",
 };
+
+const socialLinks = [
+  {
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/roger-twan',
+    icon: <IconLinkedin />,
+  },
+  {
+    name: 'GitHub',
+    url: 'https://github.com/roger-twan',
+    icon: <IconGithub />,
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/roger.twan',
+    icon: <IconInstagram />,
+  },
+  {
+    name: 'Facebook',
+    url: 'https://www.facebook.com/roger.twan',
+    icon: <IconFacebook />,
+  },
+];
 
 export default function Footer(props: React.HTMLAttributes<HTMLElement>) {
   const currentYear = new Date().getFullYear();
