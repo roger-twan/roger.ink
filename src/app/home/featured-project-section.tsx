@@ -26,13 +26,12 @@ const systemSignals = [
   'Hybrid retrieval',
   'Conversation memory',
   'Incremental ingestion',
-  'Source-grounded responses',
+  'Evaluated source-grounded responses',
 ];
 
 const technicalTags = [
   'FastAPI',
   'Next.js',
-  'RAG',
   'LlamaIndex',
   'LangChain',
   'OpenAI',
@@ -40,6 +39,8 @@ const technicalTags = [
   'Hybrid search',
   'PostgreSQL',
   'Pinecone',
+  'LangSmith',
+  'RAGAS',
   'Query rewriting',
   'Reranking',
   'Streaming responses',
@@ -126,8 +127,9 @@ export default function FeaturedProjectSection() {
             <p className="mt-4 text-base leading-7 text-white/65">
               I built a retrieval-augmented system that connects my portfolio,
               project notes, and technical writing to a conversational version
-              of me. Behind the interface, it handles ingestion, retrieval,
-              reranking, conversation context, and streaming responses.
+              of me. Behind the interface, it handles multi-source ingestion,
+              retrieval, reranking, conversation context, streaming responses,
+              LangSmith tracing, and RAGAS-backed evaluation.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">

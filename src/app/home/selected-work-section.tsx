@@ -32,7 +32,7 @@ export default function SelectedWorkSection({
           description="Browse a few projects that show how I think through product direction, interface design, engineering tradeoffs, and shipped workflows."
         />
         <div className="grid gap-6 md:grid-cols-3">
-          {projects.map((project, index) => (
+          {projects.slice(0, 3).map((project, index) => (
             <article
               key={project.title}
               style={{ animationDelay: `${index * 100}ms` }}
