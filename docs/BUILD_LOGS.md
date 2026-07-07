@@ -1,5 +1,10 @@
 # Build Logs
 
+## 5.1.0 (2026-07-07)
+
+- [Improvement] Highlight evaluated RAG-backed answers with LangSmith tracing and RAGAS-backed evaluation
+- [Improvement] Limit homepage selected work preview to the first three projects
+
 ## 5.0.0 (2026-07-05)
 
 - [Revamp] Reposition the site around AI-assisted product engineering

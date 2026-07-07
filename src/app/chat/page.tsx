@@ -22,7 +22,7 @@ const systemCapabilities = [
   'Technical writing retrieval',
   'Conversation memory',
   'Streaming responses',
-  'RAG-backed answers',
+  'Evaluated RAG-backed answers',
   'Product workflow context',
 ];
 
